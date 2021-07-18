@@ -1,0 +1,36 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateSubjectLearningsTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('subject_learnings', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
+            $table->id()->comment('primay kay');
+            $table->string('subjectId')->nullable()->comment('รหัสวิชา');
+            $table->string('subjectName')->nullable()->comment('ชื่อวิชา');
+            $table->string('schoolYear')->nullable()->comment('ปีการศึกษา');
+            $table->char('subjectType')->nullable()->comment('หมวดหมูวิชา');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('subject_learnings');
+    }
+}
