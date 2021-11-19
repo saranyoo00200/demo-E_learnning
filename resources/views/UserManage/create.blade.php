@@ -7,7 +7,7 @@
      <div class="section-body">
      	<!-- <div class="row"> -->
      		<!-- <div class="col-12"> -->
-				<form class="" action="{{route('users.store')}}" method="post" enctype="multipart/form-data">
+				<form class="" id="form_result" action="{{route('users.store')}}" method="post" enctype="multipart/form-data">
 				 @csrf
      			<div class="card">
      				<div class="card-header" style="display:block;">
@@ -97,7 +97,7 @@
                </div>
               </div>
               <div class="card-footer text-right">
-                  <button class="btn btn-success" id="submit">บันทึก</button>
+                  <span class="btn btn-success" id="submit">บันทึก</span>
                   <a href="{{ url()->previous() }}" class="btn btn-danger">ย้อนกลับ</a>
               </div>
      			</div>

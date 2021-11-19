@@ -4,11 +4,6 @@
     <section class="section">
         <div class="section-header">
             <h1>จัดการเรียนการสอน</h1>
-            <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                <div class="breadcrumb-item"><a href="#">Components</a></div>
-                <div class="breadcrumb-item">Table</div>
-            </div>
         </div>
 
         <div class="section-body">
@@ -18,7 +13,7 @@
                 <div class="card-header" style="display: block;">
                     <div class="row">
                         <div class="col-md-6">
-                            <h4>ตาราง การเรียนประสานเวลา (วิชา {{$subjectLearning['subjectName']}})</h4>
+                            <h4>ตารางเรียนออนไลน์ (วิชา {{$subjectLearning['subjectName']}})</h4>
                         </div>
                     </div>
                 </div>
@@ -65,18 +60,14 @@
                     </div>
                     <div class="col-md-4">
                       <div class="form-group" >
-                        <label for="">เวลาที่เริ่ม - เวลาที่สิ้นสุด</label>
-                        <select class="form-control" name="synch_time" id="synch_time">
-                          <option value="">เลือก</option>
-                          <option value="08:00-09:00 น." {{ ($LessonSynch[0]->synch_time == '08:00-09:00 น.') ?  'selected' : '' }} >08:00-09:00 น.</option>
-                          <option value="09:00-10:00 น." {{ ($LessonSynch[0]->synch_time == '09:00-10:00 น.') ?  'selected' : '' }} >09:00-10:00 น.</option>
-                          <option value="10:00-11:00 น." {{ ($LessonSynch[0]->synch_time == '10:00-11:00 น.') ?  'selected' : '' }} >10:00-11:00 น.</option>
-                          <option value="11:00-12:00 น." {{ ($LessonSynch[0]->synch_time == '11:00-12:00 น.') ?  'selected' : '' }} >11:00-12:00 น.</option>
-                          <option value="12:00-13:00 น." {{ ($LessonSynch[0]->synch_time == '12:00-13:00 น.') ?  'selected' : '' }} >12:00-13:00 น.</option>
-                          <option value="13:00-14:00 น." {{ ($LessonSynch[0]->synch_time == '13:00-14:00 น.') ?  'selected' : '' }} >13:00-14:00 น.</option>
-                          <option value="14:00-15:00 น." {{ ($LessonSynch[0]->synch_time == '14:00-15:00 น.') ?  'selected' : '' }} >14:00-15:00 น.</option>
-                          <option value="15:00-16:00 น." {{ ($LessonSynch[0]->synch_time == '15:00-16:00 น.') ?  'selected' : '' }} >15:00-16:00 น.</option>
-                        </select>
+                        <label for="">เวลาที่เริ่ม</label>
+                        <input type="text" class="form-control clockpicker" name="synch_starttime" id="synch_starttime" value="{{ date('H:i',strtotime($LessonSynch[0]->synch_starttime))}}">
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group" >
+                        <label for="">เวลาที่สิ้นสุด</label>
+                        <input type="text" class="form-control clockpicker" name="synch_endtime" id="synch_endtime" value="{{ date('H:i',strtotime($LessonSynch[0]->synch_endtime))}}">
                       </div>
                     </div>
                     <div class="col-md-4">

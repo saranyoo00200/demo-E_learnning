@@ -4,11 +4,6 @@
     <section class="section">
         <div class="section-header">
             <h1>จัดการเรียนการสอน</h1>
-            <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                <div class="breadcrumb-item"><a href="#">Components</a></div>
-                <div class="breadcrumb-item">Table</div>
-            </div>
         </div>
 
         <div class="section-body">
@@ -17,7 +12,7 @@
                 <div class="card-header" style="display: block;">
                     <div class="row">
                         <div class="col-md-6">
-                            <h4>ตาราง การเรียนไม่ประสานเวลา (วิชา {{ $subjectLearning['subjectName']}})</h4>
+                            <h4>ตารางเรียนออฟไลน์ (วิชา {{ $subjectLearning['subjectName']}})</h4>
                         </div>
                     </div>
                 </div>
@@ -27,7 +22,7 @@
                             <thead>
                                 <tr>
                                     <th class="text-center" width="10%">
-                                        #
+                                        <i class="fas fa-th"></i>
                                     </th>
                                     <th>ชื่อหลักสูตร</th>
                                 </tr>

@@ -1,96 +1,78 @@
 @extends('layouts.app')
+
 @section('content')
-<section class="section">
-  <div class="section-header">
-      <h1>จัดการตารางเรียน</h1>
-      <div class="section-header-breadcrumb">
-          <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-          <div class="breadcrumb-item"><a href="#">Components</a></div>
-          <div class="breadcrumb-item">Table</div>
-      </div>
-  </div>
-  <div class="section-body">
-    <div class="card">
-      <div class="card-header" style="display:block;">
-        <div class="row">
-          <div class="col-md-6">
-            <h4>จัดการตารางเรียน (Schedule Time)</h4>
-          </div>
-          <div class="col-md-6" align="right" style="margin-top: 31px;margin-bottom: -3px;">
-              <a href="{{ url('ShowTimeTable')}}" class="btn btn-info">ดูตารางเรียน</a>
-              <a href="{{ route('schedule_time.create')}}" class="btn btn-success">เพิ่มข้อมูล</a>
-          </div>
+    <section class="section">
+        <div class="section-header">
+            <h1>ตารางเรียน</h1>
         </div>
-      </div>
-      <div class="card-body">
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">วิชา</th>
-              <th scope="col">วันที่เริ่มต้น</th>
-              <th scope="col">วันที่สิ้นสุด</th>
-              <th scope="col">เวลาเริ่มต้น-เวลาสิ้นสุด</th>
-              <th scope="col">เครื่องมือ</th>
-            </tr>
-          </thead>
-          <tbody>
-            <?php $i=1; foreach ($scheduletime as $key => $value): ?>
-            <tr>
-              <th scope="col">{{ $i++ }}</th>
-              <th scope="col">{{ $value->subjectName }} ({{ $value->subjectId }})</th>
-              <th scope="col">{{ formatDateThai( date($value->schedule_startdate)) }}</th>
-              <th scope="col">{{ formatDateThai( date($value->schedule_enddate)) }}</th>
-              <th scope="col">{{ date("H:i",strtotime($value->schedule_starttime)) }}-{{ date("H:i",strtotime($value->schedule_endtime)) }} น.</th>
-              <th scope="col">
-                <form class="delete-time-form_{{ $value->schedule_id }}" action="{{ route('schedule_time.destroy',$value->schedule_id) }}" method="post">
-                <a href="{{ route('schedule_time.show',$value->schedule_id)}}" class="btn btn-info"> <i class="fas fa-eye"></i></a>
-                <a href="{{ route('schedule_time.edit',$value->schedule_id)}}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-                <button class="btn btn-danger remove_schedule" data-id="{{ $value->schedule_id }}" onclick="return false" ><i class="fas fa-trash"></i></button>
-                @csrf
-                @method('DELETE')
-                </form>
-              </th>
-            </tr>
-          <?php endforeach; ?>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-</section>
+
+        <div class="section-body">
+            <div class="card">
+                <div class="card-header" style="display: block;">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>ตารางเรียน</h4>
+                        </div>
+                        {{-- <div class="col-md-6" align="right">
+                          <a href="{{ url('subject_calendar/manage_synchronous','1') }}" class="btn btn-info">จัดการตารางเรียน</a>
+                        </div> --}}
+                    </div>
+                </div>
+                <div class="card-body p-3">
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-sm-12">
+                            <div id='calendar'></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 @endsection
 @section('scripts')
-@if (session('success'))
-	<script type="text/javascript">
-		swal({
-			title: "Good job!",
-			text: "{{ session('success') }}",
-			icon: "success",
-			button: "ตกลง",
-		});
-	</script>
-@endif
-<script type="text/javascript">
-$(document).ready(function() {
-  $('.remove_schedule').click(function() {
-   var user_id = $(this).attr('data-id');
-   swal({
-    title: "เเจ้งเตือน",
-    text: "คุณต้องการลบข้อมูลหรือไม่",
-    icon: "warning",
-    buttons:{
-      confirm: 'ตกลง',
-      cancel: 'ยกเลิก'
-    },
-    dangerMode: true,
-  })
-  .then((willDelete) => {
-  if (willDelete) {
-    $('.delete-time-form_'+user_id).submit();
-  }
-  });
-  });
-});
-</script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = $('#calendar')[0];
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                events: {
+                    url: base_url + '/showcalendar_alltime',
+                    success: function(data) {
+                        console.log(data);
+                    },
+                    color: '#3788d8', // an option!
+                    textColor: 'white',
+                },
+                eventClick: function(info) {
+                    var eventObj = info.event;
+                    var d_start = new Date(eventObj.start);
+                    var thmonth = new Array('ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.',
+                        'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.');
+                    var datestring_start = ('0' + d_start.getDate()).slice(-2) + "/" + thmonth[d_start
+                        .getMonth()] + "/" + (d_start.getFullYear() + 543);
+                    var d_end = new Date(eventObj.end);
+                    var datestring_end = ('0' + d_end.getDate()).slice(-2) + "/" + thmonth[d_start
+                        .getMonth()] + "/" + (d_end.getFullYear() + 543);
+                    var time_start = ('0' + d_start.getHours()).slice(-2) + ":" + ('0' + d_start
+                        .getMinutes()).slice(-2);
+                    var time_end = ('0' + d_end.getHours()).slice(-2) + ":" + ('0' + d_end.getMinutes())
+                        .slice(-2);
+                    var msg = 'วิชา: ' + eventObj.title + '\r\n';
+                    var teachers = eventObj.teacher;
+                    msg += 'วันที่ เริ่ม - สิ้นสุด: ' + datestring_start + ' - ' + datestring_end +
+                        '\r\n';
+                    msg += 'เวลาที่ เริ่ม - สิ้นสุด: ' + time_start + ' - ' + time_end + ' น.' + '\r\n';
+                    msg += 'ครู: ' + eventObj.extendedProps.teacher;
+                    alert(msg);
+                },
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+                },
+                locale: 'th'
+            });
+            calendar.render();
+        });
+    </script>
 @endsection

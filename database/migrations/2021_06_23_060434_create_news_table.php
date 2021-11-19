@@ -18,7 +18,7 @@ class CreateNewsTable extends Migration
             $table->string('news_title')->nullable();
             $table->integer('subject_id')->nullable();
             $table->longText('news_detail')->nullable();
-            $table->string('news_status')->nullable();
+            $table->char('news_status')->nullable();
             $table->timestamps();
         });
     }

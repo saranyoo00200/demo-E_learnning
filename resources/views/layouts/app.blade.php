@@ -8,10 +8,11 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    {{-- <title>{{ config('app.name', 'Laravel') }}</title> --}}
+    <title>..:: E-LEARNING ::..</title>
 
-     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <!-- Scripts -->
+    {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -28,14 +29,14 @@
     <script src="{{ asset('assets/backend/js/sweetalert/dist/sweetalert.min.js') }}"></script>
     <!-- CSS Libraries -->
     <link rel="stylesheet" href="{{ asset('js/datepicker/datepicker.css') }}">
-    <link rel="stylesheet" href="{{ asset('js/clockpicker/dist/jquery-clockpicker.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('js/clockpicker/dist/jquery-clockpicker.min.css') }}">
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{ asset('assets/backend/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/backend/css/components.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/backend/css/components.css')}}">
-    <link href='{{ asset("js/fullcalendar-5.8.0/lib/main.css")}}' rel='stylesheet' />
-    <script src='{{ asset("js/fullcalendar-5.8.0/lib/main.js")}}'></script>
-    <script src='{{ asset("js/fullcalendar-5.8.0/lib/locales/th.js")}}'></script>
+    <link rel="stylesheet" href="{{ asset('assets/backend/css/components.css') }}">
+    {{-- js/fullcalendar-5.8.0/lib/main.css --}}
+    <link href="{{ asset('js/fullcalendar-5.8.0/lib/main.css') }}" rel='stylesheet' defer />
+    @yield('css')
     @yield('css-step')
     @yield('css-script')
 </head>
@@ -60,7 +61,7 @@
         </div>
 
     </div>
-      <input type="hidden" name="base_url" id="base_url" value="{{ url('/') }}">
+    <input type="hidden" name="base_url" id="base_url" value="{{ url('/') }}">
     <!-- General JS Scripts -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -78,13 +79,15 @@
     <!-- Template JS File -->
     <script src="{{ asset('assets/backend/js/scripts.js') }}"></script>
     <script src="{{ asset('assets/backend/js/custom.js') }}"></script>
-    <script src="{{ asset('assets/backend/js/ckeditor4/ckeditor.js')}}"></script>
-    <script src="{{ asset('js/datepicker/bootstrap-datepicker.js')}}"></script>
-    <script src="{{ asset('js/datepicker/locales/bootstrap-datepicker.th.js')}}"></script>
-    <script src="{{ asset('js/datepicker/bootstrap-datepicker-thai.js')}}"></script>
-    <script src="{{ asset('js/clockpicker/dist/jquery-clockpicker.min.js')}}"></script>
+    <script src="{{ asset('assets/backend/js/ckeditor4/ckeditor.js') }}"></script>
+    <script src="{{ asset('js/datepicker/bootstrap-datepicker.js') }}"></script>
+    <script src="{{ asset('js/datepicker/locales/bootstrap-datepicker.th.js') }}"></script>
+    <script src="{{ asset('js/datepicker/bootstrap-datepicker-thai.js') }}"></script>
+    <script src="{{ asset('js/clockpicker/dist/jquery-clockpicker.min.js') }}"></script>
+    <script src="{{ asset('js/fullcalendar-5.8.0/lib/main.js') }}" defer></script>
+    <script src="{{ asset('js/fullcalendar-5.8.0/lib/locales/th.js') }}" defer></script>
     <script type="text/javascript">
-      var base_url = $('#base_url').val();
+        var base_url = $('#base_url').val();
     </script>
     @yield('scripts')
     @yield('cke-editor')

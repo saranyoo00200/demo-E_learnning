@@ -12,7 +12,6 @@ class Access_Subject extends Model
     protected $fillable = [
         'access_id',
         'subject_id',
-        'lesson_id',
         'status_access',
         'created_at',
         'updated_at',

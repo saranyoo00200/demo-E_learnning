@@ -24,19 +24,26 @@ class UsersLearningController extends Controller
     }
     public function index(Request $request, $id)
     {
-        // dd($test);
+        // dd($id);
         $subject = SubjectLearning::all()->where('id', '=', $id);
-        $introduction = IntroductionContent::all()->where('introduction_id', '=', $id);
+        $introduction = IntroductionContent::all()
+            ->where('introduction_id', '=', $id)
+            ->where('show_intro', '=', '1');
         //////////////////////////////skrip quiz test
         $users = Auth()->user()->id;
-        $scores = DB::table('pretest_scores')->where('users_id', '=', $id)->get('*');
+        $scores = DB::table('pretest_scores')
+            ->where('users_id', '=', $users)
+            ->get('*');
+        // $test = "";
+        // $test1 = "";
         foreach ($scores as $key => $value) {
             $test = $value->users_id;
-            // dd($users, $test);
-            if ($test == $users) {
+            $test1 = $value->subject_id;
+            if ($test1 == $id and $test == $users) {
                 return redirect('/student_lesson/'.$id);
             }
         } 
+        // dd($users, $test, $test1);
 
         return view('course_list.student_lesson.index', compact('id', 'subject', 'introduction'));
     }
@@ -125,13 +132,14 @@ class UsersLearningController extends Controller
 
         ////////////////////////////skrip quiz test
         $users = Auth()->user()->id;
-        $scores = DB::table('posttest_scores')->where('users_id', '=', $id)->get('*');
+        $scores = DB::table('posttest_scores')->where('users_id', '=', $users)->get('*');
         $quizSkrip = 0;
         foreach ($scores as $key => $value) {
             $test = $value->users_id;
+            $test1 = $value->subject_id;
             // dd($test);
             // dd($users, $test);
-            if ($test == $users) {
+            if ($test1 == $id and $test == $users) {
                 $quizSkrip = 1;
             }
         } 

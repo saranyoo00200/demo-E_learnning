@@ -18,8 +18,11 @@ class CreateSubjectLearningsTable extends Migration
             $table->id()->comment('primay kay');
             $table->string('subjectId')->nullable()->comment('รหัสวิชา');
             $table->string('subjectName')->nullable()->comment('ชื่อวิชา');
+            $table->string('title')->nullable()->comment('คำแนะนำรายวิชา');
             $table->string('schoolYear')->nullable()->comment('ปีการศึกษา');
+            $table->string('image')->nullable()->comment('ไฟล์รูป');
             $table->char('subjectType')->nullable()->comment('หมวดหมูวิชา');
+            $table->char('show_subject')->nullable()->comment('แสดงหมวดหมูวิชา');
             $table->timestamps();
         });
     }

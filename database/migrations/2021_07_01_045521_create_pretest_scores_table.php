@@ -17,8 +17,8 @@ class CreatePretestScoresTable extends Migration
             $table->id();
             $table->string('score')->nullable()->comment('คะแนนสอบก่อนเรียน');
             $table->string('timer')->nullable()->comment('เวลาในการสอบ');
-            $table->string('users_id')->nullable()->comment('ตัวเซื่อมuser');
-            $table->string('subject_id')->nullable()->comment('ตัวเซื่อมวิชา');
+            $table->integer('users_id')->nullable()->comment('ตัวเซื่อมuser');
+            $table->integer('subject_id')->nullable()->comment('ตัวเซื่อมวิชา');
             $table->timestamps();
         });
     }

@@ -17,7 +17,7 @@ class CreateLoginTimeTable extends Migration
             $table->id();
             $table->integer('user_login')->nullable();
             $table->datetime('last_login_at')->nullable();
-            $table->ipAddress('visitor');
+            $table->ipAddress('last_login_ip');
             $table->timestamps();
         });
     }

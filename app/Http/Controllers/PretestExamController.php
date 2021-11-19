@@ -113,7 +113,7 @@ class PretestExamController extends Controller
             'aq4' => $request->aq4,
             'answer' => $request->answer,
         ]);
-        return redirect('/pretest/subject/show/'. $subject_id)->with('success', 'update image successfully!');
+        return redirect('/pretest/subject/show/'. $subject_id)->with('success', 'update successfully!');
     }
 
     /**
@@ -126,6 +126,6 @@ class PretestExamController extends Controller
     {
         // dd($id);
         PretestExamt::find($id)->delete();
-        return redirect()->back()->with('success', 'Delete data successfully!');
+        return redirect()->back()->with('success', 'Delete successfully!');
     }
 }

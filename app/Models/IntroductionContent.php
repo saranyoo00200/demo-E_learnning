@@ -12,6 +12,7 @@ class IntroductionContent extends Model
     protected $fillable = [
         'title',
         'image',
+        'show_intro',
     ];
 
 }

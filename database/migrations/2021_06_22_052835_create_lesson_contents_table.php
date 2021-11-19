@@ -19,7 +19,7 @@ class CreateLessonContentsTable extends Migration
             $table->string('title')->nullable()->comment('เนื้อหาของภาพ');
             $table->string('lesson')->nullable()->comment('บทเรียนที่...');
             $table->string('lessonName')->nullable()->comment('ชื่อบทเรียน');
-            $table->string('show_lesson')->nullable()->comment('แสดงข้อมูล');
+            $table->char('show_lesson')->nullable()->comment('แสดงข้อมูล');
             $table->string('vdo')->nullable()->comment('วิดิโอการสอน');
             $table->string('subject_id')->nullable()->comment('ตัวเซื่อมเคย์');
             $table->timestamps();

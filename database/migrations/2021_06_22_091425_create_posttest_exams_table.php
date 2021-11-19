@@ -20,8 +20,8 @@ class CreatePosttestExamsTable extends Migration
             $table->string('aq2')->nullable()->comment('ตอบข้อที่ 2');
             $table->string('aq3')->nullable()->comment('ตอบข้อที่ 3');
             $table->string('aq4')->nullable()->comment('ตอบข้อที่ 4');
-            $table->string('answer')->nullable()->comment('เฉลยคำตอบ');
-            $table->char('subject_id')->nullable()->comment('ตัวเซื่อมคีย์');
+            $table->char('answer')->nullable()->comment('เฉลยคำตอบ');
+            $table->integer('subject_id')->nullable()->comment('ตัวเซื่อมคีย์');
             $table->timestamps();
         });
     }

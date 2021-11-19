@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class ChatController extends Controller
@@ -11,13 +11,19 @@ class ChatController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-     public function __construct()
+    public function __construct()
     {
         $this->middleware('auth');
     }
     public function index()
     {
-        return view('chat_system.index');
+        $room = DB::table('chat_rooms')
+            ->join('lesson_synch', 'chat_rooms.sync_id', '=', 'lesson_synch.sync_id')
+            ->join('subject_learnings', 'lesson_synch.subject_id', '=', 'subject_learnings.id')
+            ->where('teacher_id', Auth()->user()->id)
+            ->get();
+        // dd($room);
+        return view('chat_system.index', compact('room'));
     }
 
     /**
@@ -27,7 +33,6 @@ class ChatController extends Controller
      */
     public function create()
     {
-
     }
 
     /**
@@ -63,17 +68,17 @@ class ChatController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+    // /**
+    //  * Update the specified resource in storage.
+    //  *
+    //  * @param  \Illuminate\Http\Request  $request
+    //  * @param  int  $id
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function update_navigator(Request $request, $id)
+    // {
+    //     dd($request->all());
+    // }
 
     /**
      * Remove the specified resource from storage.

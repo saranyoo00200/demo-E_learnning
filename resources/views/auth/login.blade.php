@@ -38,8 +38,14 @@
                                 @enderror
                             </div>
                         </div>
-
-
+                        <?php if (Session::has('msg') != ''): ?>
+                          <div class="row">
+                              <div class="col-md-12" align="center">
+                                <strong class="text-danger">{!! Session::get("msg") !!}</strong>
+                              </div>
+                          </div>
+                          <br>
+                        <?php endif; ?>
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">

@@ -66,7 +66,7 @@
         </div>
     </form>
     <ul class="navbar-nav navbar-right">
-  <!--       <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
+        <!--       <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
                 class="nav-link nav-link-lg message-toggle beep"><i class="far fa-envelope"></i></a>
             <div class="dropdown-menu dropdown-list dropdown-menu-right">
                 <div class="dropdown-header">Messages
@@ -133,7 +133,7 @@
                 </div>
             </div>
         </li> -->
- <!--        <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
+        <!--        <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
                 class="nav-link notification-toggle nav-link-lg beep"><i class="far fa-bell"></i></a>
             <div class="dropdown-menu dropdown-list dropdown-menu-right">
                 <div class="dropdown-header">Notifications
@@ -193,14 +193,17 @@
                 </div>
             </div>
         </li> -->
+        <li><a href="{{ url('/dashboard') }}"><img alt="" src="{{ asset('assets/backend/img/user_profile/' . Auth::user()->user_photo) }}"
+                    class="rounded-circle mr-1" width="35px" height="35px"></a></li>
         <li class="dropdown"><a href="#" data-toggle="dropdown"
                 class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                {{-- <img alt="" src="../assets/img/avatar/avatar-1.png" class="rounded-circle mr-1"> --}}
+                {{-- <img alt="" src="{{ asset('assets/backend/img/user_profile/' . Auth::user()->user_photo) }}"
+                class="rounded-circle mr-1"> --}}
                 <div class="d-sm-none d-lg-inline-block">{{ Auth::user()->name }} </div>
             </a>
             <div class="dropdown-menu dropdown-menu-right">
                 {{-- <div class="dropdown-title">Logged in 5 min ago</div> --}}
-                <a href="{{ url('edit_profile')}}" class="dropdown-item has-icon">
+                <a href="{{ url('edit_profile') }}" class="dropdown-item has-icon">
                     <i class="far fa-user"></i> แก้ไขโปรไฟล์
                 </a>
                 {{-- <a href="features-activities.html" class="dropdown-item has-icon">
@@ -210,12 +213,13 @@
                     <i class="fas fa-cog"></i> Settings
                 </a> --}}
                 <div class="dropdown-divider"></div>
-                    <a class="dropdown-item text-center" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                        {{ __('Logout') }}
-                    </a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                        @csrf
-                    </form>
+                <a class="dropdown-item text-center" href="{{ route('logout') }}"
+                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    {{ __('Logout') }}
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
             </div>
         </li>
     </ul>

@@ -14,7 +14,7 @@
             <?php echo $chartData; ?>,
             <?php echo $chartTotal; ?>,
         ]);
-
+    
         var options = {
             title: 'ทดสอบก่อนเรียน',
             pieHole: 0.0,
@@ -52,8 +52,7 @@
 
                     <span class="text-danger">ใช้เวลา {{ $item->timer }} นาที</span><br>
 
-
-                    <button class="btn btn-outline-secondary">ดูผลเฉลย</button>
+                    <!-- <button class="btn btn-outline-secondary">ดูผลเฉลย</button> -->
                 </div>
                 <div class="py-2">
                     <a href="{{ url('/student_lesson/' . $subject_id) }}" class="btn btn-primary">เข้าสู่บทเรียน</a>
@@ -62,7 +61,7 @@
         </div>
         <div class="col-md">
             <div class="card p-4" style="height: 220px">
-                <span><b>วันที่ {{ date('d-m-Y', strtotime($item->created_at)) }}</b></span>
+                <span><b>วันที่ {{ formatDateThai(date($item->created_at)) }}</b></span>
                 @foreach ($introduction as $item)
                 <p style="text-indent: 50px">{!! $item->title !!}</p>
                 @endforeach

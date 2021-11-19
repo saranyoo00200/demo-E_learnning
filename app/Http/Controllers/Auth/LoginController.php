@@ -46,7 +46,7 @@ class LoginController extends Controller
 
     public function authenticated(Request $request, $user)
     {
-      if (Auth::attempt(['username' => $request->username, 'password' =>  $request->password, 'user_status' => 1]))
+      if (Auth::attempt(['username' => $request->username, 'password' =>  $request->password, 'user_status' => 1,'user_type'=> 1 ]))
       {
         DB::table('login_time')->insert([
         'user_login' => Auth::user()->id,
@@ -55,12 +55,23 @@ class LoginController extends Controller
         'created_at' => Carbon::now()->toDateTimeString(),
         'updated_at' => Carbon::now()->toDateTimeString()
         ]);
+      }elseif (Auth::attempt(['username' => $request->username, 'password' =>  $request->password, 'user_status' => 1,'user_type'=> 3 ])) {
+        DB::table('login_time')->insert([
+        'user_login' => Auth::user()->id,
+        'last_login_at' => Carbon::now()->toDateTimeString(),
+        'last_login_ip' => $request->getClientIp(),
+        'created_at' => Carbon::now()->toDateTimeString(),
+        'updated_at' => Carbon::now()->toDateTimeString()
+        ]);
+      }else {
+        Auth::logout();
+        session()->flash('msg', 'Username หรือ Password ผิด กรุณากรอกใหม่');
+        return redirect(route('login'));
       }
-    }
-    protected function credentials(Request $request) {
 
-     return ['username' => $request->username, 'password' =>  $request->password, 'user_status' => 1];
     }
+
+
     public function logout(Request $request) {
         Auth::logout();
         return redirect('/login');

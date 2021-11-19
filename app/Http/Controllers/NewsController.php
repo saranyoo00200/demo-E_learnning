@@ -19,7 +19,9 @@ class NewsController extends Controller
     public function index()
     {
         $news = News::join('subject_learnings','news.subject_id','=','subject_learnings.id','left')
-        ->get(['news_id','news_title','subjectName','news_status','news.created_at','news_photo']);
+        ->join('subject_categories', 'subject_learnings.subjectType', '=', 'subject_categories.subjectType')
+        ->get(['news_id','news_title','subjectName','news_status','news.created_at','news_photo', 'category_name']);
+        // dd($news);
         return view('NewsManage.index',['news' => $news]);
     }
 
@@ -42,6 +44,7 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
+      dd($request->all());
       $input['news_title'] = $request->news_title;
       $input['subject_id'] = $request->subject_id;
       $input['news_status'] = $request->news_status;

@@ -3,27 +3,21 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>เพิ่มบทเรียน</h1>
-            <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                <div class="breadcrumb-item"><a href="#">Event Manager</a></div>
-                <div class="breadcrumb-item">Introduction</div>
-            </div>
+            <h1>วิชาที่เปิดสอน</h1>
         </div>
 
         <div class="section-body">
 
             <div class="card p-3">
                 <div class="card-header">
-                    <h4>แบบฟอร์มแนะนำ</h4>
+                    <h4>บทเรียน</h4>
                 </div>
                 <form action="{{ url('/lesson/content/add/' . $subject_id) }}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
-
                     <div class="col-md form-group">
                         <label for="editor">คำบรรยาย</label>
-                        <textarea class="form-control" name="title" id="editor" rows="10"></textarea>
+                        <textarea class="form-control" name="title" id="title" required></textarea>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
@@ -49,15 +43,16 @@
                     </div>
                     <div class="col-md form-group">
                         <label>รูปภาพ</label>
-                        <input type="file" name="image" class="form-control" required>
+                        <input type="file" accept=".gif,.jpg,.jpeg,.png" name="image" class="form-control" required>
                     </div>
                     <div class="col-md form-group">
                         <label>วิดิโอ</label>
-                        <input type="file" name="vdo" class="form-control" required>
+                        <input type="file" accept="video/mp4,video/x-m4v,video/*" name="vdo" class="form-control"
+                            required>
                     </div>
                     <div class="card-footer text-right">
-                        <button class="btn btn-primary mr-1" type="submit">Submit</button>
-                        <button class="btn btn-secondary" type="reset">Reset</button>
+                        <button class="btn btn-primary mr-1" type="submit">ยืนยัน</button>
+                        <button class="btn btn-warning" onclick="goBack()">กลับ</button>
                     </div>
                 </form>
             </div>
@@ -66,12 +61,14 @@
 @endsection
 
 @section('cke-editor')
-    <script src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/4.16.1/standard/ckeditor.js"></script>
+
     <script>
-        ClassicEditor
-            .create(document.querySelector('#editor'))
-            .catch(error => {
-                console.error(error);
-            });
+        CKEDITOR.replace('title');
+    </script>
+    <script>
+        function goBack() {
+            window.history.back();
+        }
     </script>
 @endsection

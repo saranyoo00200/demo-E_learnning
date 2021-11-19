@@ -25,8 +25,20 @@ class CourseListController extends Controller
     }
     public function index()
     {
-        $subjectLearning = SubjectLearning::all();
-        return view('course_list.index', compact('subjectLearning'));
+        $user_id = auth()->user()->id;
+        $subjectLearning = DB::table('subject_learnings')
+            ->join('access_subjects', 'subject_learnings.id', '=', 'access_subjects.subject_id')
+            ->where('subject_learnings.show_subject', '=', '1')
+            ->where('access_subjects.status_access', '=', '1')
+            ->where('access_subjects.user_id', '=', $user_id)
+            ->get();
+
+        $subjectLearning_admin = DB::table('subject_categories')
+            ->join('subject_learnings', 'subject_categories.subjectType', '=', 'subject_learnings.subjectType')
+            ->get('*');
+        // dd($subjectLearning_admin);
+        // dd($subjectLearning);
+        return view('course_list.index', compact('subjectLearning', 'subjectLearning_admin', 'user_id'));
     }
 
     /**
@@ -52,12 +64,15 @@ class CourseListController extends Controller
         $subject_id = $id;
 
         $result = $request->all();
-        $answer = DB::table('pretest_examts')->where('subject_id', '=', $subject_id)->get('*');
+        $answer = DB::table('pretest_examts')
+            ->where('subject_id', '=', $subject_id)
+            ->get('*');
 
         $answer1 = [];
         foreach ($answer as $key => $value) {
             $answer1[$value->id] = $value->answer;
         }
+
         $arrResult = $result['answer'];
         $arrAnswer = $answer1;
         $score = 0;
@@ -73,15 +88,19 @@ class CourseListController extends Controller
             }
         }
         $result_score = $score;
-        // $test = [];
-        // $scores = DB::table('pretest_scores')->get('users_id');
-        // foreach ($scores as $key => $value) {
-        //     $test = $value->users_id;
-        //     if ($test == $users) {
-        //         return redirect('/show_answer/' . $id);
-        //     }
-        //     dd($test);
-        // }
+
+        $scores = DB::table('pretest_scores')
+            ->where('users_id', '=', $users)
+            ->get('*');
+        foreach ($scores as $key => $value) {
+            $test = $value->users_id;
+            $test1 = $value->subject_id;
+            if ($test1 == $id and $test == $users) {
+                return redirect('/show_answer/' . $id);
+            }
+            // dd($test);
+        }
+
         PretestScores::insert([
             'score' => $result_score,
             'users_id' => $users,
@@ -105,7 +124,9 @@ class CourseListController extends Controller
         $subject_id = $id;
 
         $result = $request->all();
-        $answer = DB::table('posttest_exams')->where('subject_id', '=', $subject_id)->get('*');
+        $answer = DB::table('posttest_exams')
+            ->where('subject_id', '=', $subject_id)
+            ->get('*');
 
         $answer1 = [];
         foreach ($answer as $key => $value) {
@@ -114,7 +135,7 @@ class CourseListController extends Controller
         $arrResult = $result['answer'];
         $arrAnswer = $answer1;
         $score = 0;
-        // dd($answer1);
+        // dd($id);
 
         foreach ($arrResult as $key => $valueResult) {
             $valueAnswer = $value->answer;
@@ -128,13 +149,16 @@ class CourseListController extends Controller
         }
         $result_score = $score;
 
-        // $scores = DB::table('posttest_scores')->get('*');
-        // foreach ($scores as $key => $value) {
-        //     $test = $value->users_id;
-        //     if ($test == $users) {
-        //         return redirect('/show_answer_2/' . $id);
-        //     }
-        // }
+        $scores = DB::table('posttest_scores')
+            ->where('users_id', '=', $users)
+            ->get('*');
+        foreach ($scores as $key => $value) {
+            $test = $value->users_id;
+            $test1 = $value->subject_id;
+            if ($test1 == $id and $test == $users) {
+                return redirect('/show_answer_2/' . $id);
+            }
+        }
 
         PosttestScores::insert([
             'score' => $result_score,
@@ -169,22 +193,17 @@ class CourseListController extends Controller
      */
     public function total_score(Request $request, $id)
     {
+        // dd($id);
         $subject = DB::table('subject_learnings')
             ->where('id', '=', $id)
             ->get('*');
 
-        $score = DB::table('users')
-            ->join('pretest_scores', 'users.id', '=', 'pretest_scores.users_id')
-            ->join('posttest_scores', 'users.id', '=', 'posttest_scores.users_id')
-            ->select('users.name', 'pretest_scores.score as preScore', 'posttest_scores.score as postScore')
-            ->get();
-        // dd($score);  
-
         //count score
-        $preScore = DB::table('pretest_examts')->where('subject_id', '=', $id);
-        $postScore = DB::table('posttest_exams')->where('subject_id', '=', $id);
+        $preScore = DB::table('pretest_examts')->where('subject_id', '=', $id)->count();
+        $postScore = DB::table('posttest_exams')->where('subject_id', '=', $id)->count();
 
-        return view('course_list.total_score', compact('subject', 'score', 'preScore', 'postScore'));
+        // dd($score);
+        return view('course_list.total_score', compact('subject', 'preScore', 'postScore', 'id'));
     }
 
     /**
@@ -209,7 +228,9 @@ class CourseListController extends Controller
         $subject_id = $id;
         $users = auth()->user()->id;
 
-        $preScore = PretestScores::all()->where('users_id', '=', $users)->where('subject_id', '=', $subject_id);
+        $preScore = PretestScores::all()
+            ->where('users_id', '=', $users)
+            ->where('subject_id', '=', $subject_id);
 
         // dd($id);
         $subject = DB::table('subject_learnings')
@@ -232,7 +253,7 @@ class CourseListController extends Controller
             ->get('score');
         // dd($result);
 
-        $chartData = "";
+        $chartData = '';
         foreach ($result as $valuePre) {
             $chartData = "['ข้อที่ตอบถูก', " . $valuePre->score . '],';
         }
@@ -262,11 +283,11 @@ class CourseListController extends Controller
         //     ->orderBy('score', 'ASC')
         //     ->get();
 
-        $label_score = "";
-        $data_score = "";
+        $label_score = '';
+        $data_score = '';
         foreach ($score as $value) {
-            $label_score .= "" . $value->score . ",";
-            $data_score .= "" . $value->amount . ",";
+            $label_score .= '' . $value->score . ',';
+            $data_score .= '' . $value->amount . ',';
         }
         // dd($label_score, $data_score);
         //line chart end
@@ -281,10 +302,10 @@ class CourseListController extends Controller
             ->groupBy('pretest_scores.score')
             ->get();
 
-        $scoreMe_score = "";
-        $scoreMe_label = "";
+        $scoreMe_score = '';
+        $scoreMe_label = '';
         foreach ($scoreMe as $value) {
-            $scoreMe_score .= "" . $value->score . "";
+            $scoreMe_score .= '' . $value->score . '';
         }
 
         $scoreTest = PretestScores::select('score')
@@ -296,7 +317,7 @@ class CourseListController extends Controller
             ->get();
 
         foreach ($scoreTest as $key => $value) {
-            $scoreMe_label .= "" . $value->amount . "";
+            $scoreMe_label .= '' . $value->amount . '';
         }
 
         // dd($scoreMe_label);
@@ -326,8 +347,12 @@ class CourseListController extends Controller
         $users = auth()->user()->id;
         // dd($users);
         $posttestExam = PosttestExam::all()->where('subject_id', '=', $subject_id);
-        $postScore = PosttestScores::all()->where('subject_id', '=', $subject_id)->where('users_id', '=', $users);
-        $preScore = PretestScores::all()->where('subject_id', '=', $subject_id)->where('users_id', '=', $users);
+        $postScore = PosttestScores::all()
+            ->where('subject_id', '=', $subject_id)
+            ->where('users_id', '=', $users);
+        $preScore = PretestScores::all()
+            ->where('subject_id', '=', $subject_id)
+            ->where('users_id', '=', $users);
 
         $subject = DB::table('subject_learnings')
             ->join('posttest_scores', 'subject_learnings.id', '=', 'posttest_scores.subject_id')
@@ -349,7 +374,7 @@ class CourseListController extends Controller
             ->where('pretest_scores.subject_id', '=', $subject_id)
             ->get('score');
         // dd($result);
-        $chartData = "";
+        $chartData = '';
         foreach ($result as $valuePre) {
             $chartData = "['ข้อที่ตอบถูก', " . $valuePre->score . '],';
         }
@@ -369,11 +394,11 @@ class CourseListController extends Controller
             ->orderByRaw('CONVERT(pretest_scores.score, SIGNED) ASC')
             ->get();
 
-        $label_score = "";
-        $data_score = "";
+        $label_score = '';
+        $data_score = '';
         foreach ($score as $value) {
-            $label_score .= "" . $value->score . ",";
-            $data_score .= "" . $value->amount . ",";
+            $label_score .= '' . $value->score . ',';
+            $data_score .= '' . $value->amount . ',';
         }
         // dd($label_score, $data_score);
 
@@ -387,10 +412,10 @@ class CourseListController extends Controller
             ->groupBy('pretest_scores.score')
             ->get();
 
-        $scoreMe_score = "";
-        $scoreMe_label = "";
+        $scoreMe_score = '';
+        $scoreMe_label = '';
         foreach ($scoreMe as $value) {
-            $scoreMe_score .= "" . $value->score . "";
+            $scoreMe_score .= '' . $value->score . '';
         }
 
         $scoreTest = PretestScores::select('score')
@@ -402,7 +427,7 @@ class CourseListController extends Controller
             ->get();
 
         foreach ($scoreTest as $key => $value) {
-            $scoreMe_label .= "" . $value->amount . "";
+            $scoreMe_label .= '' . $value->amount . '';
         }
 
         // dd($scoreMe_label);
@@ -426,7 +451,7 @@ class CourseListController extends Controller
             ->where('posttest_scores.subject_id', '=', $subject_id)
             ->get('score');
 
-        $chartData2 = "";
+        $chartData2 = '';
         foreach ($result2 as $valuePre) {
             $chartData2 = "['ข้อที่ตอบถูก', " . $valuePre->score . '],';
         }
@@ -446,11 +471,11 @@ class CourseListController extends Controller
             ->orderByRaw('CONVERT(posttest_scores.score, SIGNED) ASC')
             ->get();
 
-        $label_score2 = "";
-        $data_score2 = "";
+        $label_score2 = '';
+        $data_score2 = '';
         foreach ($score2 as $value) {
-            $label_score2 .= "" . $value->score . ",";
-            $data_score2 .= "" . $value->amount . ",";
+            $label_score2 .= '' . $value->score . ',';
+            $data_score2 .= '' . $value->amount . ',';
         }
         // dd($label_score2, $data_score2);
         //line chart end
@@ -465,10 +490,10 @@ class CourseListController extends Controller
             ->groupBy('posttest_scores.score')
             ->get();
 
-        $scoreMe_score2 = "";
-        $scoreMe_label2 = "";
+        $scoreMe_score2 = '';
+        $scoreMe_label2 = '';
         foreach ($scoreMe2 as $value) {
-            $scoreMe_score2 .= "" . $value->score . "";
+            $scoreMe_score2 .= '' . $value->score . '';
         }
 
         $scoreTest2 = PosttestScores::select('score')
@@ -480,7 +505,7 @@ class CourseListController extends Controller
             ->get();
 
         foreach ($scoreTest2 as $key => $value) {
-            $scoreMe_label2 .= "" . $value->amount . "";
+            $scoreMe_label2 .= '' . $value->amount . '';
         }
 
         // dd($scoreMe_label2);
@@ -488,7 +513,6 @@ class CourseListController extends Controller
 
         $arr['scoreMe_score2'] = rtrim($scoreMe_score2, ',');
         $arr['scoreMe_label2'] = rtrim($scoreMe_label2, ',');
-
 
         $arr['label_score2'] = rtrim($label_score2, ',');
         $arr['data_score2'] = rtrim($data_score2, ',');

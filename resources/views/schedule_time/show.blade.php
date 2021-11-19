@@ -57,14 +57,55 @@
                      <div class="col-md-3">
                        <div class="form-group" >
                          <label for="">เวลาที่สิ้นสุด</label>
-                         <p>{{ date('H:i',strtotime($scheduleTime->schedule_endtime)).' น.' }}</p>
+                         <p>
+													 <?php
+													 $end = "$scheduleTime->schedule_enddate $scheduleTime->schedule_endtime";
+													 echo date('H:i',strtotime('+1 minutes',strtotime($end)));
+												  	?>น.
+													 </p>
                        </div>
                      </div>
                  </div>
                </div>
               </div>
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+											<label class="form-label">ทำซ้ำวัน</label>
+											<div class="selectgroup selectgroup-pills">
+												<label class="selectgroup-item">
+													<input type="checkbox" name="repeat_day[1]" <?= (!empty($repeat_day[1])) ? 'checked' : ''?> value="1" class="selectgroup-input" disabled>
+													<span class="selectgroup-button">จันทร์</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="repeat_day[2]" <?= (!empty($repeat_day[2])) ? 'checked' : ''?> value="2" class="selectgroup-input" disabled>
+													<span class="selectgroup-button">อังคาร</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="repeat_day[3]" <?= (!empty($repeat_day[3])) ? 'checked' : ''?> value="3" class="selectgroup-input" disabled>
+														<span class="selectgroup-button">พุธ</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="repeat_day[4]" <?= (!empty($repeat_day[4])) ? 'checked' : ''?> value="4" class="selectgroup-input" disabled>
+													<span class="selectgroup-button">พฤหัสบดี</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="repeat_day[5]" <?= (!empty($repeat_day[5])) ? 'checked' : ''?> value="5" class="selectgroup-input" disabled>
+													<span class="selectgroup-button">ศุกร์</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="repeat_day[6]" <?= (!empty($repeat_day[6])) ? 'checked' : ''?> value="6" class="selectgroup-input" disabled>
+													<span class="selectgroup-button">เสาร์</span>
+												</label>
+												<label class="selectgroup-item">
+													<input type="checkbox" name="repeat_day[7]" <?= (!empty($repeat_day[7])) ? 'checked' : ''?> value="7" class="selectgroup-input" disabled>
+													<span class="selectgroup-button">อาทิตย์</span>
+												</label>
+											</div>
+										</div>
+								</div>
+							</div>
               <div class="card-footer text-right">
-                  <button class="btn btn-success" id="submit">บันทึก</button>
                   <a href="{{ url()->previous() }}" class="btn btn-danger">ย้อนกลับ</a>
               </div>
      			</div>

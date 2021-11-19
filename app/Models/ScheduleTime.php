@@ -4,7 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\ScheduleTime;
+use Auth;
 class ScheduleTime extends Model
 {
     use HasFactory;
@@ -21,4 +22,19 @@ class ScheduleTime extends Model
         'schedule_endtime',
         'teacher_id',
     ];
+    public function checkschedule_time($input)
+    {
+      if (!empty($input['schedule_startdate'])) {
+        list($d,$m,$y) = explode('/',$input['schedule_startdate']);
+        $schedule_startdate = "{$d}-{$m}-".($y-543);
+      }
+      if (!empty($input['schedule_enddate'])) {
+        list($d,$m,$y) = explode('/',$input['schedule_enddate']);
+        $schedule_enddate = "{$d}-{$m}-".($y-543);
+      }
+      $schedule_starttime = $input['schedule_starttime'];
+      $schedule_starttime = $input['schedule_endtime'];
+      
+      // $data = ScheduleTime::where('schedule_startdate',)
+    }
 }

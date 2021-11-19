@@ -75,6 +75,7 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // dd($request->all());
         $input['name'] = $request->name;
         $input['email'] = $request->email;
         if (!empty($request->password)) {

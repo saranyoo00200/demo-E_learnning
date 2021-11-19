@@ -17,8 +17,9 @@ class CreateIntroductionContentsTable extends Migration
             $table->engine = 'InnoDB';
             $table->id();
             $table->string('title')->nullable()->comment('บนนำ');
+            $table->char('show_intro')->nullable()->comment('แสดงบทนำหรือไม่?');
             $table->string('image')->nullable()->comment('รูปภาพ');
-            $table->string('introduction_id')->nullable()->comment('ตัวเซื่อมคีย์');
+            $table->integer('introduction_id')->nullable()->comment('ตัวเซื่อมคีย์');
             $table->timestamps();
         });
     }

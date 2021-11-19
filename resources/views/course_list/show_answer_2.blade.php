@@ -63,16 +63,16 @@
         </div>
     </div>
     <div class="row p-0">
-        <div class="col-md-3 text-center">
+        <div class="col-md-3">
             <div class="card">
                 @foreach ($introduction as $item)
-                <img src="{{ asset($item->image) }}" width="200px" height="220px" alt="">
+                <img src="{{ asset($item->image) }}" width="100%" height="220px" alt="">
                 @endforeach
             </div>
         </div>
         <div class="col-md-3 text-center">
             <div class="card p-4" style="height: 220px">
-                <div style="font-size: 20px;" class="py-2">
+                <div style="font-size: 14px;" class="py-2">
                     @foreach ($subject as $item)
                     วิชา: {{ $item->subjectName }}<br>
                     @endforeach
@@ -88,7 +88,7 @@
         </div>
         <div class="col-md">
             <div class="card p-4" style="height: 220px">
-                <span><b>วันที่ {{ date('d-m-Y', strtotime($item->created_at)) }}</b></span>
+                <span><b>วันที่ {{ formatDateThai(date($item->created_at)) }}</b></span>
                 @foreach ($introduction as $item)
                 <p style="text-indent: 50px">{!! $item->title !!}</p>
                 @endforeach
@@ -97,25 +97,31 @@
     </div>
     <div class="row">
         <div class="col-md-6">
-            <div id="donutchart" style="width: 100%; height: 270px;"></div><br>
-            @foreach($preScore as $value)
-            <b>คะแนนก่อนเรียน {{ $value->score }}/{{ $pretestExam->count() }} คะแนน</b>
-            @endforeach
-        </div>
-        <div class="col-md-6">
-            <div class="bg-white p-3">
-                <canvas id="myChart1" style="width: 100%; height: 310px;"></canvas>
+            <div class="card">
+            <div class="p-3 text-center">
+                <div id="donutchart" style="width: 100%; height: 100%;"></div><br>
+                @foreach($preScore as $value)
+                <b>คะแนนก่อนเรียน {{ $value->score }}/{{ $pretestExam->count() }} คะแนน</b>
+                @endforeach
+            </div>
             </div>
         </div>
         <div class="col-md-6">
-            <div id="donutchart2" style="width: 100%; height: 270px;"></div><br>
-            @foreach($postScore as $value2)
-            <b>คะแนนหลังเรียน {{ $value2->score }}/{{ $posttestExam->count() }} คะแนน</b>
-            @endforeach
+            <div class="bg-white p-3">
+                <canvas id="myChart1" style="width: 100%; height: 240px;"></canvas>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card p-3 text-center">
+                <div id="donutchart2" style="width: 100%; height: 100%;"></div><br>
+                @foreach($postScore as $value2)
+                <b>คะแนนหลังเรียน {{ $value2->score }}/{{ $posttestExam->count() }} คะแนน</b>
+                @endforeach
+            </div>
         </div>
         <div class="col-md-6">
             <div class="bg-white p-3">
-                <canvas id="myChart2" style="width: 100%; height: 310px;"></canvas>
+                <canvas id="myChart2" style="width: 100%; height: 240px;"></canvas>
             </div>
         </div>
     </div>

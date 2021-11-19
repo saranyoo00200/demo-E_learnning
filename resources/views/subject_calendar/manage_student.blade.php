@@ -4,11 +4,6 @@
     <section class="section">
         <div class="section-header">
             <h1>จัดการเรียนการสอน</h1>
-            <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                <div class="breadcrumb-item"><a href="#">Components</a></div>
-                <div class="breadcrumb-item">Table</div>
-            </div>
         </div>
 
         <div class="section-body">
@@ -42,7 +37,7 @@
                       <div class="col-md-4">
                         <div class="form-group">
                              <label class="font-weight-bold">เวลาที่เริ่ม - เวลาที่สิ้นสุด</label>
-                             <p>{{ $subjectLearning[0]->synch_time }}</p>
+                             <p>{{ date('H:i',strtotime($subjectLearning[0]->synch_starttime))}} - {{ date('H:i',strtotime($subjectLearning[0]->synch_endtime))}} น.</p>
                          </div>
                       </div>
                       <div class="col-md-4">
@@ -77,7 +72,7 @@
                               <thead>
                                   <tr>
                                       <th class="text-center">
-                                          #
+                                        <i class="fas fa-th"></i>
                                       </th>
                                       <th>Username</th>
                                       <th>ชื่อ-นามสกุล</th>

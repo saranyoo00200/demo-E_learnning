@@ -1,38 +1,44 @@
 @extends('layouts.app')
 
 @section('content')
-    <section class="section">
-        <div class="section-header">
-            <h1>บทเรียน</h1>
-            <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                <div class="breadcrumb-item"><a href="#">Components</a></div>
-                <div class="breadcrumb-item">Table</div>
+<section class="section">
+    <div class="section-header">
+        <h1>บทเรียน</h1>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <div>
+                <h6>{!! $lessonContent->title !!}</h6>
             </div>
         </div>
-        <div class="card">
-            <div class="card-header">
-                <div>
-                    <h6>{!! $lessonContent->title !!}</h6>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body p-2 text-center">
+                    <img width="100%" height="305px" src="{{ asset($lessonContent->image) }}" alt="">
                 </div>
             </div>
-            <div class="card-body p-2 text-center">
-                <img width="100%" height="300px" src="{{ asset($lessonContent->image) }}" alt="">
-            </div>
         </div>
-        <div class="card">
-            <div class="card-header">
-                <div>
-                    <h2>VIDEO!</h2>
+        <div class="col-md">
+            <div class="card">
+                <div class="card-body p-2 text-center">
+                    <video width="100%" height="300px" controls>
+                        <source src="{{ asset($lessonContent->vdo) }}" type="video/mp4">
+                    </video>
                 </div>
             </div>
-            <div class="card-body p-2 text-center">
-                <video width="100%" height="300px" controls>
-                    <source src="{{ asset($lessonContent->vdo) }}" type="video/mp4">
-                </video>
-            </div>
         </div>
-        <div class="section-body">
-        </div>
-    </section>
+    </div>
+
+    <button class="btn btn-warning" onclick="Back()">กลับ</button>
+</section>
+@endsection
+
+@section('script')
+<script>
+    function Back() {
+        window.history.back();
+    }
+</script>
 @endsection

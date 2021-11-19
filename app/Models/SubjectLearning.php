@@ -12,7 +12,10 @@ class SubjectLearning extends Model
     protected $fillable = [
         'subjectId',
         'subjectName',
+        'title',
         'schoolYear',
+        'image',
         'subjectType',
+        'show_subject',
     ];
 }

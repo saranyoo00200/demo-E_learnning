@@ -1,57 +1,57 @@
 $(document).ready(function () {
-  $('#username').keyup(function() {
-    var username = $(this).val();
-    var user_id = $('.section').attr('data-id');
-    var rv = true;
-  $.ajax({
-    type:'POST',
-    url:base_url+'/check_username',
-    headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    },
-    data:{username:username,user_id:user_id},
-    success:function(data){
-      console.log(data);
-      if (data > 0) {
-        swal({
-          title: "แจ้งเตือน",
-          text: "Username นี้ได้ถูกใช้ไปแล้ว กรุณากรอกใหม่",
-          icon: "warning",
-          button: "ตกลง",
-        });
-        $('#username').val('');
-        $('#username').focus();
-        return rv = false;
-      }
-    }
-  });
-  });
-  $('#email').keyup(function() {
-    var email = $(this).val();
-    var user_id = $('.section').attr('data-id');
-    var rv = true;
-  $.ajax({
-    type:'POST',
-    url:base_url+'/check_email',
-    headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    },
-    data:{email:email,user_id:user_id},
-    success:function(data){
-      if (data > 0) {
-        swal({
-          title: "แจ้งเตือน",
-          text: "อีเมล นี้ได้ถูกใช้ไปแล้ว กรุณากรอกใหม่",
-          icon: "warning",
-          button: "ตกลง",
-        });
-        $('#email').val('');
-        $('#email').focus();
-        return rv = false;
-      }
-    }
-  });
-  });
+  // $('#username').keyup(function() {
+  //   var username = $(this).val();
+  //   var user_id = $('.section').attr('data-id');
+  //   var rv = true;
+  // $.ajax({
+  //   type:'POST',
+  //   url:base_url+'/check_username',
+  //   headers: {
+  //       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  //   },
+  //   data:{username:username,user_id:user_id},
+  //   success:function(data){
+  //     console.log(data);
+  //     if (data > 0) {
+  //       swal({
+  //         title: "แจ้งเตือน",
+  //         text: "Username นี้ได้ถูกใช้ไปแล้ว กรุณากรอกใหม่",
+  //         icon: "warning",
+  //         button: "ตกลง",
+  //       });
+  //       $('#username').val('');
+  //       $('#username').focus();
+  //       return rv = false;
+  //     }
+  //   }
+  // });
+  // });
+  // $('#email').keyup(function() {
+  //   var email = $(this).val();
+  //   var user_id = $('.section').attr('data-id');
+  //   var rv = true;
+  // $.ajax({
+  //   type:'POST',
+  //   url:base_url+'/check_email',
+  //   headers: {
+  //       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  //   },
+  //   data:{email:email,user_id:user_id},
+  //   success:function(data){
+  //     if (data > 0) {
+  //       swal({
+  //         title: "แจ้งเตือน",
+  //         text: "อีเมล นี้ได้ถูกใช้ไปแล้ว กรุณากรอกใหม่",
+  //         icon: "warning",
+  //         button: "ตกลง",
+  //       });
+  //       $('#email').val('');
+  //       $('#email').focus();
+  //       return rv = false;
+  //     }
+  //   }
+  // });
+  // });
   $('#submit').click(function() {
   var username = $('#username').val();
   var password = $('#password').val();
@@ -148,6 +148,50 @@ $(document).ready(function () {
         });
         return false;
       } else {
+        $.ajax({
+          type:'POST',
+          url:base_url+'/check_username',
+          headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          },
+          data:{username:username,user_id:user_id},
+          success:function(data){
+            console.log(data);
+            if (data > 0) {
+              swal({
+                title: "แจ้งเตือน",
+                text: "Username นี้ได้ถูกใช้ไปแล้ว กรุณากรอกใหม่",
+                icon: "warning",
+                button: "ตกลง",
+              });
+              $('#username').focus();
+            }else {
+              $.ajax({
+                type:'POST',
+                url:base_url+'/check_email',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data:{email:email,user_id:user_id},
+                success:function(data){
+                  if (data > 0) {
+                    swal({
+                      title: "แจ้งเตือน",
+                      text: "อีเมล นี้ได้ถูกใช้ไปแล้ว กรุณากรอกใหม่",
+                      icon: "warning",
+                      button: "ตกลง",
+                    });
+                    $('#email').focus();
+                    return rv = false;
+                  }else {
+                    $('#form_result').submit();
+                    return true;
+                  }
+                }
+              });
+            }
+          }
+        });
 
       }
     } else {
@@ -159,6 +203,52 @@ $(document).ready(function () {
           button: "ตกลง",
         });
         return false;
+      } else {
+        $.ajax({
+          type:'POST',
+          url:base_url+'/check_username',
+          headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          },
+          data:{username:username,user_id:user_id},
+          success:function(data){
+            console.log(data);
+            if (data > 0) {
+              swal({
+                title: "แจ้งเตือน",
+                text: "Username นี้ได้ถูกใช้ไปแล้ว กรุณากรอกใหม่",
+                icon: "warning",
+                button: "ตกลง",
+              });
+              $('#username').focus();
+            }else {
+              $.ajax({
+                type:'POST',
+                url:base_url+'/check_email',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data:{email:email,user_id:user_id},
+                success:function(data){
+                  if (data > 0) {
+                    swal({
+                      title: "แจ้งเตือน",
+                      text: "อีเมล นี้ได้ถูกใช้ไปแล้ว กรุณากรอกใหม่",
+                      icon: "warning",
+                      button: "ตกลง",
+                    });
+                    $('#email').focus();
+                    return rv = false;
+                  }else {
+                    $('#form_result').submit();
+                    return true;
+                  }
+                }
+              });
+            }
+          }
+        });
+
       }
     }
 

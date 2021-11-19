@@ -3,19 +3,14 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>บทนำ</h1>
-            <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                <div class="breadcrumb-item"><a href="#">Event Manager</a></div>
-                <div class="breadcrumb-item">Introduction</div>
-            </div>
+            <h1>วิชาที่เปิดสอน</h1>
         </div>
 
         <div class="section-body">
 
             <div class="card">
                 <div class="card-header">
-                    <h4>แบบฟอร์มแก้ไขบทนำ</h4>
+                    <h4>บทนำ</h4>
                 </div>
                 <form action="{{ url('/introduction/content/update/' . $introductionContent->id) }}" method="POST"
                     enctype="multipart/form-data">
@@ -23,23 +18,41 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="editor">บทนำ</label>
-                            <textarea type="text" id="editor" name="title" class="form-control"
-                                 required>{!! $introductionContent->title !!}"</textarea>
+                            <textarea id="title" name="title" class="form-control"
+                                required>{!! $introductionContent->title !!}</textarea>
                         </div>
-                        <div class="form-group">
-                            <label>รูปภาพ</label>
-                            <input type="file" name="image" class="form-control"
-                                value="{{ $introductionContent->image }}">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>ต้องการให้แสดงในคลาสหรือไม่</label>
+                                    <select class="form-control" name="show_intro" required>
+                                        <option class="active" value="">เลือก</option>
+                                        <option value="1"
+                                            {{ old('show_intro', $introductionContent->show_intro) == 1 ? 'selected' : '' }}>
+                                            แสดง</option>
+                                        <option value="2"
+                                            {{ old('show_intro', $introductionContent->show_intro) == 2 ? 'selected' : '' }}>
+                                            ไม่แสดง</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md">
+                                <div class="form-group">
+                                    <label>รูปภาพ</label>
+                                    <input type="file" accept=".gif,.jpg,.jpeg,.png" name="image" class="form-control"
+                                        value="{{ $introductionContent->image }}">
+                                </div>
+                            </div>
                         </div>
                         <input type="hidden" name="old_image" value="{{ $introductionContent->image }}">
                         <input type="hidden" name="introduction_id" value="{{ $introductionContent->introduction_id }}">
                     </div>
-                    {{-- <div class="form-group mb-3">
-                    <img src="{{ asset($introductionContent->image) }}" width="200px" alt="">
-                </div> --}}
+                    <!-- <div class="form-group mb-3">
+                            <img src="{{ asset($introductionContent->image) }}" width="200px" alt="">
+                        </div> -->
                     <div class="card-footer text-right">
-                        <button class="btn btn-primary mr-1" type="submit">Submit</button>
-                        <button class="btn btn-secondary" type="reset">Reset</button>
+                        <button class="btn btn-primary mr-1" type="submit">ยืนยัน</button>
+                        <a class="btn btn-warning" onclick="goBack()">กลับ</a>
                     </div>
                 </form>
             </div>
@@ -48,12 +61,16 @@
 @endsection
 
 @section('cke-editor')
-    <script src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/4.16.1/standard/ckeditor.js"></script>
+
     <script>
-        ClassicEditor
-            .create(document.querySelector('#editor'))
-            .catch(error => {
-                console.error(error);
-            });
+        CKEDITOR.replace('title');
+    </script>
+@endsection
+@section('script')
+    <script>
+        function goBack() {
+            window.history.back();
+        }
     </script>
 @endsection

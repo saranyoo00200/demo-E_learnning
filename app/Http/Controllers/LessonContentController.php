@@ -33,13 +33,13 @@ class LessonContentController extends Controller
         $this->validate($request, [
             'title' => 'required',
             'lesson' => 'required',
-            'lessonName' => 'required',
             'show_lesson' => 'required|in:1,2',
+            'lessonName' => 'required',
             'image' => 'required|mimes:jpg,jpeg,png',
-            'vdo' => 'required|mimes:mp4',
+            'vdo' => 'required|mimes:mp4,mov,ogg',
         ]);
-        // dd($request->all());
 
+        // dd($request->all());
         //ส่วนของรูป
         $image = $request->file('image');
 

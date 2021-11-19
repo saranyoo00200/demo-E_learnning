@@ -1,51 +1,64 @@
 @extends('layouts.app')
 
 @section('content')
-    <section class="section">
-        <div class="section-header">
-            <h1>เพิ่มบทนำ</h1>
-            <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                <div class="breadcrumb-item"><a href="#">Event Manager</a></div>
-                <div class="breadcrumb-item">Introduction</div>
+<section class="section">
+    <div class="section-header">
+        <h1>วิชาที่เปิดสอน</h1>
+    </div>
+
+    <div class="section-body">
+
+        <div class="card">
+            <div class="card-header">
+                <h4>บทนำ</h4>
             </div>
-        </div>
-
-        <div class="section-body">
-
-            <div class="card">
-                <div class="card-header">
-                    <h4>แบบฟอร์มเพิ่มบทนำ</h4>
+            <form action="{{ url('/introduction/content/add/'. $subject_id) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="editor">บทนำ</label>
+                        <textarea id="title" name="title" class="form-control" required></textarea>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>ต้องการให้แสดงในคลาสหรือไม่</label>
+                                <select class="form-control" name="show_intro" required>
+                                    <option class="active" value="">เลือก</option>
+                                    <option value="1">แสดง</option>
+                                    <option value="2">ไม่แสดง</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md">
+                            <div class="form-group">
+                                <label>รูปภาพ</label>
+                                <input type="file" accept=".gif,.jpg,.jpeg,.png" name="image" class="form-control" required>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <form action="{{ url('/introduction/content/add/'. $subject_id) }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <div class="card-body">
-                        <div class="form-group">
-                            <label for="editor">บทนำ</label>
-                            <textarea type="text" id="editor" name="title" class="form-control"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label>รูปภาพ</label>
-                            <input type="file" name="image" class="form-control" required>
-                        </div>
-                    </div>
-                    <div class="card-footer text-right">
-                        <button class="btn btn-primary mr-1" type="submit">Submit</button>
-                        <button class="btn btn-secondary" type="reset">Reset</button>
-                    </div>
-                </form>
-            </div>
+                <div class="card-footer text-right">
+                    <button class="btn btn-primary mr-1" type="submit">ยืนยัน</button>
+                    <button class="btn btn-warning" onclick="goBack()">กลับ</button>
+                </div>
+            </form>
         </div>
-    </section>
+    </div>
+</section>
 @endsection
 
 @section('cke-editor')
-    <script src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script>
+<script src="https://cdn.ckeditor.com/4.16.1/standard/ckeditor.js"></script>
+
+<script>
+    CKEDITOR.replace('title');
+</script>
+@endsection
+@section('script')
     <script>
-        ClassicEditor
-            .create(document.querySelector('#editor'))
-            .catch(error => {
-                console.error(error);
-            });
+        function goBack() {
+            window.history.back();
+        }
     </script>
 @endsection

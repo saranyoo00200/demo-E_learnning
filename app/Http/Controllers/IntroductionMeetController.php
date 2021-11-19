@@ -31,9 +31,11 @@ class IntroductionMeetController extends Controller
         // dd($id);
         $this->validate($request, [
             'title' => 'required',
+            'show_intro' => 'required|in:1,2',
             'image' => 'required|mimes:jpg,jpeg,png',
         ]);
 
+        // dd($request->all());
         // //         //เข้ารหัสรูป
         $image = $request->file('image');
 
@@ -48,11 +50,11 @@ class IntroductionMeetController extends Controller
         $upload_location = ('image/introduction/content/');
         $full_path = $upload_location . $img_name;
 
-        // dd($request->all());
         //up load image
 
         IntroductionContent::insert([
             'title' => $request->title,
+            'show_intro' => $request->show_intro,
             'introduction_id' => $id,
             'image' => $full_path,
         ]);
@@ -81,7 +83,8 @@ class IntroductionMeetController extends Controller
      */
     public function show($id)
     {
-        //
+        $introductionContent = IntroductionContent::find($id);
+        return view('subject_learning.intro_content.show', compact('introductionContent'));
     }
 
     /**
@@ -109,11 +112,12 @@ class IntroductionMeetController extends Controller
 
         $this->validate($request, [
             'title' => 'required',
+            'show_intro' => 'required|in:1,2',
             'image' => 'mimes:jpg,jpeg,png',
         ]);
 
         $subject_id = $request->input('introduction_id');
-        // dd($subject_id);
+        // dd($request->all());
         // dd($request->portfolio_image, $request->portfolio_title, $request->portfolio_);
 
         $image = $request->file('image');
@@ -131,17 +135,19 @@ class IntroductionMeetController extends Controller
 
             IntroductionContent::find($id)->update([
                 'title' => $request->title,
+                'show_intro' => $request->show_intro,
                 'image' => $full_path,
             ]);
             // dd($request->old_image);
             $old_image = $request->old_image;
-            unlink(public_path($old_image));
+            // unlink(public_path($old_image));
 
             $image->move(public_path($upload_location), $img_name);
             return redirect('/introduction/content/'.$subject_id)->with('success', 'update image successfully!');
         } else {
             IntroductionContent::find($id)->update([
                 'title' => $request->title,
+                'show_intro' => $request->show_intro,
             ]);
             return redirect('/introduction/content/'.$subject_id)->with('success', 'update image successfully!');
         }
@@ -156,7 +162,7 @@ class IntroductionMeetController extends Controller
     public function destroy($id)
     {
         $img = IntroductionContent::find($id)->image;
-        unlink(public_path($img));
+        // unlink(public_path($img));
 
         $introduction = IntroductionContent::find($id)->delete();
         return redirect()->back()->with('success', 'Delete data successfully!');
