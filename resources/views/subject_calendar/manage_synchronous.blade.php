@@ -11,7 +11,7 @@
                 <div class="card-header" style="display: block;">
                     <div class="row">
                         <div class="col-md-6">
-                            <h4>ตารางเรียนออฟไลน์</h4>
+                            <h4>วิชาเรียนออนไลน์</h4>
                         </div>
                     </div>
                     <?php if ($id == 1): ?>

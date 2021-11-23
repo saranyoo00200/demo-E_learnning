@@ -3,7 +3,7 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>ตารางเรียน</h1>
+            <h1>ตารางสอน</h1>
         </div>
 
         <div class="section-body">
@@ -11,7 +11,7 @@
                 <div class="card-header" style="display: block;">
                     <div class="row">
                         <div class="col-md-6">
-                            <h4>ตารางเรียน</h4>
+                            <h4>ตารางสอน</h4>
                         </div>
                         {{-- <div class="col-md-6" align="right">
                           <a href="{{ url('subject_calendar/manage_synchronous','1') }}" class="btn btn-info">จัดการตารางเรียน</a>

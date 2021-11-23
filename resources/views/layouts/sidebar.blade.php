@@ -34,7 +34,7 @@
             </li>
             <li>
                 <a class="nav-link" href="{{ url('/schedule_time') }}">
-                    <i class="fas fa-calendar-alt"></i><span>ตารางเรียน</span></a>
+                    <i class="fas fa-calendar-alt"></i><span>ตารางสอน</span></a>
             </li>
             @endrole
             @role('admin')
@@ -63,7 +63,7 @@
             </li>
             <li>
                 <a class="nav-link" href="{{ url('/schedule_time') }}">
-                    <i class="fas fa-calendar-alt"></i><span>ตารางเรียน</span></a>
+                    <i class="fas fa-calendar-alt"></i><span>ตารางสอน</span></a>
             </li>
             {{-- <li>
                 <a class="nav-link" href="{{ url('/chat_system') }}"><i
