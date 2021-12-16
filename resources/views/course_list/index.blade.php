@@ -3,7 +3,7 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>รายการวิชาเรียน</h1>
+            <h1>คะแนนสอบ</h1>
         </div>
         <div class="card">
             <div class="card-header">
