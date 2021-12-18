@@ -62,7 +62,7 @@ $(document).ready(function () {
   var user_status = $('#user_status').val();
   var user_type = $('#user_type').val();
   var user_id = $('.section').attr('data-id');
-  var username_eng = /^[a-zA-Z]+$/.test(username);
+  var username_eng = /^[A-Za-z0-9]+$/.test(username);
   if (username == '') {
     swal({
       title: "แจ้งเตือน",
@@ -74,7 +74,7 @@ $(document).ready(function () {
   }else if (username_eng == false) {
     swal({
       title: "แจ้งเตือน",
-      text: "กรุณากรอก Username เป็นภาษาอังกฤษ",
+      text: "กรุณากรอก Username เป็นภาษาอังกฤษและตัวเลขฯ",
       icon: "warning",
       button: "ตกลง",
     });

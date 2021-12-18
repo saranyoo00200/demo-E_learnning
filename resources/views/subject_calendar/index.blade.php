@@ -17,39 +17,41 @@
                 <div class="card-header" style="display: block;">
                     <div class="row">
                         <div class="col-md-6">
-                            <h4>ตาราง หมวดวิชาเรียน</h4>
+                            <h4>แบบการเรียนออนไลน์ และออฟไลน์</h4>
                         </div>
                     </div>
                 </div>
                 <div class="card-body p-3">
-                  <div class="row">
-                    <div class="col-12 col-md-6 col-sm-12">
-                <div class="card bg-light">
-                  <div class="card-body">
-                    <div class="empty-state" data-height="400" style="height: 400px;">
-                      <div class="empty-state-icon bg-success">
-                        <i class="fas fa-calendar-check"></i>
-                      </div>
-                      <h2>การเรียนแบบออนไลน์ (Online)</h2>
-                      <a href="{{ url('subject_calendar/manage_schedule','1') }}" class="btn btn-primary mt-4">ดูรายละเอียด</a>
+                    <div class="row">
+                        <div class="col-12 col-md-6 col-sm-12">
+                            <div class="card bg-light">
+                                <div class="card-body">
+                                    <div class="empty-state" data-height="400" style="height: 400px;">
+                                        <div class="empty-state-icon bg-success">
+                                            <i class="fas fa-calendar-check"></i>
+                                        </div>
+                                        <h2>การเรียนแบบออนไลน์ (Online)</h2>
+                                        <a href="{{ url('subject_calendar/manage_schedule', '1') }}"
+                                            class="btn btn-primary mt-4">ดูรายละเอียด</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-sm-12">
+                            <div class="card bg-light">
+                                <div class="card-body">
+                                    <div class="empty-state" data-height="400" style="height: 400px;">
+                                        <div class="empty-state-icon bg-danger">
+                                            <i class="fas fa-calendar-times"></i>
+                                        </div>
+                                        <h2>การเรียนแบบออฟไลน์ (Offline)</h2>
+                                        <a href="{{ url('subject_calendar/manage_synchronous', '2') }} "
+                                            class="btn btn-primary mt-4">ดูรายละเอียด</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-12 col-md-6 col-sm-12">
-                <div class="card bg-light">
-                  <div class="card-body">
-                    <div class="empty-state" data-height="400" style="height: 400px;">
-                      <div class="empty-state-icon bg-danger">
-                        <i class="fas fa-calendar-times"></i>
-                      </div>
-                      <h2>การเรียนแบบออฟไลน์ (Offline)</h2>
-                      <a href="{{ url('subject_calendar/manage_synchronous','2') }} " class="btn btn-primary mt-4">ดูรายละเอียด</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-                  </div>
                 </div>
             </div>
         </div>
