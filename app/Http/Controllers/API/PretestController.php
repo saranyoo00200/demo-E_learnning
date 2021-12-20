@@ -49,6 +49,7 @@ class PretestController extends Controller
             ->where('pretest_examts.subject_id', '=', $id)
             // ->join('subject_learnings', 'pretest_examts.subject_id', 'subject_learnings,id')
             ->select('id', 'question', 'aq1', 'aq2', 'aq3', 'aq4', 'answer')
+            ->inRandomOrder()
             ->get();
 
         return response()->json($data_quiz, 200);

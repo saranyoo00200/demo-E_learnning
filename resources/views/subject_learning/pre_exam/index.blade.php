@@ -60,16 +60,28 @@
                                             <h4>{!! $item->question !!}</h4>
                                             <div class="row ml-2">
                                                 <div class="col-md-6">
-                                                    <p>{!! $item->aq1 !!}</p>
+                                                    <div class="d-flex">
+                                                        <p>1. </p>
+                                                        <p>{!! $item->aq1 !!}</p>
+                                                    </div>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <p>{!! $item->aq2 !!}</p>
+                                                    <div class="d-flex">
+                                                        <p>2. </p>
+                                                        <p>{!! $item->aq2 !!}</p>
+                                                    </div>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <p>{!! $item->aq3 !!}</p>
+                                                    <div class="d-flex">
+                                                        <p>3. </p>
+                                                        <p>{!! $item->aq3 !!}</p>
+                                                    </div>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <p>{!! $item->aq4 !!}</p>
+                                                    <div class="d-flex">
+                                                        <p>4. </p>
+                                                        <p>{!! $item->aq4 !!}</p>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <p class="text-danger ml-4">เฉลยคำตอบข้อที่ถูกคือ: ข้อที่{{ $item->answer }}

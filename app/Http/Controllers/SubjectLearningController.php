@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\SubjectLearning;
 use App\Models\Access_Subject;
+use App\Models\IntroductionContent;
 use Illuminate\Support\Facades\DB;
 
 class SubjectLearningController extends Controller
@@ -273,6 +274,7 @@ class SubjectLearningController extends Controller
      */
     public function destroy(Request $request, $id)
     {
+        // IntroductionContent::where('introduction_id', '=', $id)->delete();
         Access_Subject::where('subject_id', '=', $id)->delete();
         SubjectLearning::find($id)->delete();
         return redirect()

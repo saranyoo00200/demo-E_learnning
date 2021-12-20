@@ -13,6 +13,7 @@ class IntroductionContent extends Model
         'title',
         'image',
         'show_intro',
+        'introduction_id'
     ];
 
 }

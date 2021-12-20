@@ -47,6 +47,7 @@ class PosttestController extends Controller
         $posttest = DB::table('posttest_exams')
             ->where('posttest_exams.subject_id', '=', $id)
             ->select('id', 'question', 'aq1', 'aq2', 'aq3', 'aq4', 'answer')
+            ->inRandomOrder()
             ->get();
 
         return response()->json($posttest, 200);
