@@ -49,7 +49,9 @@ class PosttestController extends Controller
             ->select('id', 'question', 'aq1', 'aq2', 'aq3', 'aq4', 'answer')
             ->inRandomOrder()
             ->get();
-
+        foreach ($posttest as $key => $value) {
+            $value->answer = base64_encode($value->answer);
+        }
         return response()->json($posttest, 200);
     }
 

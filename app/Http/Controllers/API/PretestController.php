@@ -51,6 +51,10 @@ class PretestController extends Controller
             ->select('id', 'question', 'aq1', 'aq2', 'aq3', 'aq4', 'answer')
             ->inRandomOrder()
             ->get();
+        foreach ($data_quiz as $key => $value) {
+            $value->answer = base64_encode($value->answer);
+        }
+        // dd($answer);
 
         return response()->json($data_quiz, 200);
     }

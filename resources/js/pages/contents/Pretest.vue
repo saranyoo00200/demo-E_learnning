@@ -260,9 +260,10 @@ export default {
         .then((res) => {
           this.questions = [];
           for (let i = 0; i < res.data.length; i++) {
+            var answer = window.atob(res.data[i].answer);
             this.questions[i] = {
               question: res.data[i].question,
-              correctAnswer: "a" + res.data[i].answer,
+              correctAnswer: "a" + answer,
               answers: {
                 a1: res.data[i].aq1,
                 a2: res.data[i].aq2,
