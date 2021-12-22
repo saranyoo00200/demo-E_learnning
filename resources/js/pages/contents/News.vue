@@ -210,6 +210,7 @@ export default {
       fetch(page)
         .then((res) => res.json())
         .then((res) => {
+          console.log(res.data);
           this.News = res.data;
           this.pagination = {
             current_page: res.current_page,
