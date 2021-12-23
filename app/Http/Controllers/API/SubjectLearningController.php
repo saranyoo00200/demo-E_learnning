@@ -596,7 +596,7 @@ class SubjectLearningController extends Controller
         $data = ClassStudent::all()
             ->where('user_id', $request->user_id)
             ->where('subject_id', $request->subject_id);
-        // dd($request->all());
+        // dd($data);
         $count_progress = '';
         $class_id = '';
         foreach ($data as $key => $value) {

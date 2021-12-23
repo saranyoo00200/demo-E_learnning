@@ -31,11 +31,14 @@
                   style="height: 7rem"
                 ></p>
                 <router-link
+                  @click.native="moveUp()"
                   :to="{
                     name: 'course_id',
                     params: { id: post.id },
                   }"
-                  ><a class="btn btn-info mt-2 text-white">ดูรายละเอียด</a></router-link
+                  ><a class="btn btn-info mt-2 text-white"
+                    >ดูรายละเอียด</a
+                  ></router-link
                 >
               </div>
             </div>
@@ -89,6 +92,9 @@ export default {
         .catch((err) => {
           this.error = "Error!!";
         });
+    },
+    moveUp() {
+      window.scrollTo(0, 0);
     },
   },
 };

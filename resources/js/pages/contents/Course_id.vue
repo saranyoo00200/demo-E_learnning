@@ -16,6 +16,7 @@
             <h4>{{ posts.subjectName }}</h4>
             <h4>{{ posts.subjectId }}</h4>
             <router-link
+              @click.native="moveUp()"
               :to="{
                 name: 'content_categorie',
                 params: { id: category.subjectType },
@@ -256,6 +257,9 @@ export default {
         .catch((error) => {
           console.log(error);
         });
+    },
+    moveUp() {
+      window.scrollTo(0, 0);
     },
     clickRegisterSubject() {
       // console.log(this.checkAlertRegisterSim);

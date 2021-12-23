@@ -50,7 +50,6 @@
                                     Posted:
                                     <em>{{ format_date(news.created_at) }}</em>
                                   </li>
-                                  <!-- <li>Comments: <em>2</em></li> -->
                                 </ul>
                                 <div><hr /></div>
                                 <div class="title">{{ news.news_title }}</div>
@@ -61,6 +60,7 @@
                                 ></p>
                                 <div class="btn">
                                   <router-link
+                                    @click.native="moveUp()"
                                     :to="{
                                       name: 'news_id',
                                       params: { id: news.news_id },
@@ -245,6 +245,9 @@ export default {
         moment.locale("th");
         return moment(String(value)).add(543, "years").format("DD/MMM/YYYY");
       }
+    },
+    moveUp() {
+      window.scrollTo(0, 0);
     },
   },
 };

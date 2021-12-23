@@ -132,6 +132,7 @@
                                               text-decoration: none;
                                               color: black;
                                             "
+                                            @click.native="moveUp()"
                                             :to="{
                                               name: 'preface2',
                                               params: { id: lesson.id },
@@ -168,6 +169,7 @@
                                             text-decoration: none;
                                             color: black;
                                           "
+                                          @click.native="moveUp()"
                                           :to="{
                                             name: 'lessons_id',
                                             params: { id: lesson.id },
@@ -181,7 +183,10 @@
                                         v-if="lesson.count_progress == 100"
                                         class="dropdown-item"
                                         @click="
-                                          downloadCerticate(lesson.subjectName)
+                                          downloadCerticate(
+                                            lesson.subjectName,
+                                            lesson.id
+                                          )
                                         "
                                         href="#"
                                         >ใบประกาศ(PDF)</a
@@ -265,6 +270,7 @@
                                             text-decoration: none;
                                             color: black;
                                           "
+                                          @click.native="moveUp()"
                                           :to="{
                                             name: 'preface2',
                                             params: { id: lesson.id },
@@ -280,6 +286,7 @@
                                             text-decoration: none;
                                             color: black;
                                           "
+                                          @click.native="moveUp()"
                                           :to="{
                                             name: 'lessons_id',
                                             params: { id: lesson.id },
@@ -415,6 +422,7 @@
                                               text-decoration: none;
                                               color: black;
                                             "
+                                            @click.native="moveUp()"
                                             :to="{
                                               name: 'preface2',
                                               params: { id: lesson.id },
@@ -450,6 +458,7 @@
                                             text-decoration: none;
                                             color: black;
                                           "
+                                          @click.native="moveUp()"
                                           :to="{
                                             name: 'lessons_id',
                                             params: { id: lesson.id },
@@ -463,7 +472,10 @@
                                         v-if="lesson.count_progress == 100"
                                         class="dropdown-item"
                                         @click="
-                                          downloadCerticate(lesson.subjectName)
+                                          downloadCerticate(
+                                            lesson.subjectName,
+                                            lesson.id
+                                          )
                                         "
                                         href="#"
                                         >ใบประกาศ(PDF)</a
@@ -547,6 +559,7 @@
                                             text-decoration: none;
                                             color: black;
                                           "
+                                          @click.native="moveUp()"
                                           :to="{
                                             name: 'preface2',
                                             params: { id: lesson.id },
@@ -562,6 +575,7 @@
                                             text-decoration: none;
                                             color: black;
                                           "
+                                          @click.native="moveUp()"
                                           :to="{
                                             name: 'lessons_id',
                                             params: { id: lesson.id },
@@ -830,9 +844,11 @@ export default {
               subjectId: res.data[index].subjectId,
               student_status: res.data[index].student_status,
               class_id: res.data[index].class_id,
+              count_progress: res.data[index].count_progress,
               attendClass: 0,
             };
           }
+          this.my_subject_leassons = this.data;
           for (let index = 0; index < res.data.length; index++) {
             if (res.data[index].student_status == 1) {
               axios
@@ -848,7 +864,6 @@ export default {
                       }
                     }
                   }
-                  this.my_subject_leassons = this.data;
                   this.loading = false;
                 })
                 .catch((err) => {
@@ -893,11 +908,14 @@ export default {
         var fullUri = document.createElement("a");
 
         fullUri.href = fileURL;
-        fullUri.setAttribute("download", "certificates/" + value + ".pdf");
+        fullUri.setAttribute("download", "file/" + value + ".pdf");
         document.body.appendChild(fullUri);
 
         fullUri.click();
       });
+    },
+    moveUp() {
+      window.scrollTo(0, 0);
     },
   },
 };

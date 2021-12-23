@@ -24,6 +24,7 @@
               <b>รายวิชาที่เลือกลงทะเบียน</b
               ><router-link
                 class="btn btn-outline-secondary float-right"
+                @click.native="moveUp()"
                 to="/learning/course"
                 >เลือกวิชาเรียน</router-link
               >
@@ -164,6 +165,9 @@ export default {
   methods: {
     handleDateClick: function (arg) {
       alert("date click! " + arg.dateStr);
+    },
+    moveUp() {
+      window.scrollTo(0, 0);
     },
     DataCalendar() {
       axios

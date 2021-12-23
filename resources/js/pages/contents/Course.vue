@@ -28,7 +28,11 @@
               </div>
             </div>
 
-            <section id="nextAndPrev" class="courses-grid" style="padding-top: 0px">
+            <section
+              id="nextAndPrev"
+              class="courses-grid"
+              style="padding-top: 0px"
+            >
               <div class="container">
                 <h2
                   class=""
@@ -76,6 +80,7 @@
                           style="height: 7rem"
                         ></p>
                         <router-link
+                          @click.native="moveUp()"
                           :to="{
                             name: 'course_id',
                             params: { id: post.id },
@@ -264,6 +269,9 @@ export default {
         .catch((err) => {
           this.error = "Error!!";
         });
+    },
+    moveUp() {
+      window.scrollTo(0, 0);
     },
   },
 };

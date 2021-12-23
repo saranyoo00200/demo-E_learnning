@@ -16,27 +16,39 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <router-link class="nav-link" to="/"
-              >หน้าหลัก <span class="sr-only">(current)</span></router-link
+            <router-link @click.native="moveUp()" class="nav-link" to="/"
+              >หน้าหลัก<span class="sr-only">(current)</span></router-link
             >
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/learning/course"
+            <router-link
+              @click.native="moveUp()"
+              class="nav-link"
+              to="/learning/course"
               >คอร์สเรียน</router-link
             >
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/learning/news"
+            <router-link
+              @click.native="moveUp()"
+              class="nav-link"
+              to="/learning/news"
               >ข่าวสาร</router-link
             >
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/learning/teacher"
+            <router-link
+              @click.native="moveUp()"
+              class="nav-link"
+              to="/learning/teacher"
               >อาจารย์ผู้สอน</router-link
             >
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/learning/contact"
+            <router-link
+              @click.native="moveUp()"
+              class="nav-link"
+              to="/learning/contact"
               >ติดต่อ</router-link
             >
           </li>
@@ -46,7 +58,7 @@
             <span class="navbar-text">
               <div class="row d-flex align-items-center">
                 <div class="col-md-0">
-                  <router-link to="/learning/dashboard"
+                  <router-link to="/learning/dashboard" @click.native="moveUp()"
                     ><img
                       class="rounded-circle"
                       :src="DataUser.user_photo"
@@ -59,6 +71,7 @@
                   <router-link
                     class="text-white"
                     type="button"
+                    @click.native="moveUp()"
                     to="/learning/dashboard"
                     style="text-decoration: none"
                     ><h5>{{ this.$store.state.user_name }}</h5></router-link
@@ -83,6 +96,7 @@
                         this.$store.state.user_type == 2 ||
                         this.$store.state.user_type == 1
                       "
+                      @click.native="moveUp()"
                       class="dropdown-item"
                       to="/learning/dashboard"
                       >แดชบอร์ด</router-link
@@ -90,6 +104,7 @@
                     <router-link
                       v-show="this.$store.state.user_type == 3"
                       class="dropdown-item"
+                      @click.native="moveUp()"
                       to="/learning/dashboard"
                       >ตารางสอน</router-link
                     >
@@ -101,12 +116,16 @@
                         this.$store.state.user_type == 1
                       "
                       class="dropdown-item"
+                      @click.native="moveUp()"
                       to="/learning/dashboard/lessons"
                       >บทเรียน</router-link
                     >
                   </li>
                   <li>
-                    <router-link class="dropdown-item" to="/learning/chat"
+                    <router-link
+                      class="dropdown-item"
+                      @click.native="moveUp()"
+                      to="/learning/chat"
                       >แชทห้องเรียน</router-link
                     >
                   </li>
@@ -117,6 +136,7 @@
                         this.$store.state.user_type == 1
                       "
                       class="dropdown-item"
+                      @click.native="moveUp()"
                       to="/learning/dashboard/timetables"
                       >ตารางเรียน</router-link
                     >
@@ -128,6 +148,7 @@
                         this.$store.state.user_type == 1
                       "
                       class="dropdown-item"
+                      @click.native="moveUp()"
                       to="/learning/calendar_simulations"
                       >ลงทะเบียนเรียน</router-link
                     >
@@ -135,6 +156,7 @@
                   <li>
                     <router-link
                       class="dropdown-item"
+                      @click.native="moveUp()"
                       to="/learning/dashboard/profiles"
                       >แก้ไขโปรไฟล์</router-link
                     >
@@ -238,6 +260,9 @@ export default {
         .catch((err) => {
           this.error = "Error!!";
         });
+    },
+    moveUp() {
+      window.scrollTo(0, 0);
     },
   },
 };

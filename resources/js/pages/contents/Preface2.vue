@@ -18,26 +18,6 @@
                 <a href="#">{{ DataIntro.subjectName }}</a>
                 <hr />
               </div>
-
-              <!-- <div class="section-body">
-                <div class="row">
-                  <div class="col-md-4">
-                    <img
-                      :src="DataIntro.image"
-                      alt=""
-                      width="280px"
-                      height="280px"
-                    />
-                  </div>
-                  <div class="col-md-8">
-                    <h2>บทนำ</h2>
-                    <p
-                      style="text-indent: 50px"
-                      :inner-html.prop="DataIntro.title"
-                    ></p>
-                  </div>
-                </div>
-              </div> -->
               <div class="section-body">
                 <div
                   class="mb-4"
@@ -81,7 +61,7 @@
                       rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
                     margin-right: 10px;
                   "
-                  @click="redirectPageToPretest"
+                  @click="redirectPageToPretest(), moveUp()"
                   ><i class="fas fa-question-circle"></i>
                   ทำแบบทดสอบก่อนเรียน
                 </a>
@@ -89,6 +69,7 @@
                 <router-link
                   v-show="this.checkRedirect == 1"
                   class="btn btn-primary"
+                  @click.native="moveUp()"
                   style="
                     box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
                       rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
@@ -208,6 +189,9 @@ export default {
         name: "pretest",
         params: { id: this.$route.params.id },
       });
+    },
+    moveUp() {
+      window.scrollTo(0, 0);
     },
   },
 };

@@ -264,16 +264,16 @@
                       </td>
                       <td>{{ data.subjectName }}</td>
                       <td>
-                        <a class="btn btn-primary" type="button">
-                          <router-link
-                            style="text-decoration: none; color: white"
-                            :to="{
-                              name: 'preface2',
-                              params: { id: data.id },
-                            }"
-                            >เข้าเรียน</router-link
-                          >
-                        </a>
+                        <router-link
+                          @click="moveUp()"
+                          :to="{
+                            name: 'preface2',
+                            params: { id: data.id },
+                          }"
+                          ><a class="btn btn-primary text-white"
+                            >เข้าเรียน</a
+                          ></router-link
+                        >
                       </td>
                     </tr>
                     <tr
@@ -329,7 +329,7 @@
           </div>
         </div>
 
-        <div v-show="this.DataProgress != ''">
+        <div v-show="this.show_subject_leasson_left > 0">
           <h3 class="text-xs font-weight-bold">การ์ดความคืบหน้า</h3>
           <div class="row">
             <div
@@ -362,12 +362,16 @@
                         {{ data.count_progress }}%
                       </div>
                     </div>
-                    <button
-                      class="btn btn-primary float-right"
-                      @click="clickLearning(data.id)"
+                    <router-link
+                      @click.native="moveUp()"
+                      :to="{
+                        name: 'preface2',
+                        params: { id: data.id },
+                      }"
+                      ><a class="btn btn-primary mt-2 text-white float-right"
+                        >เรียนต่อ</a
+                      ></router-link
                     >
-                      เรียนต่อ
-                    </button>
                   </div>
                 </div>
               </div>
@@ -729,6 +733,7 @@ export default {
         },
       },
       loading: true,
+      show_subject_leasson_left: 0,
       DataProgress: [],
       learnOnline: "",
       learnOffline: "",
@@ -796,6 +801,12 @@ export default {
       axios
         .get("/api/my_subject_leasson_left/" + this.$store.state.user_id)
         .then((res) => {
+          for (let i = 0; i < res.data.length; i++) {
+            if (res.data[i].count_progress != 100) {
+              this.show_subject_leasson_left++;
+              console.log(this.show_subject_leasson_left);
+            }
+          }
           this.DataProgress = res.data;
           this.loading = false;
         })
@@ -803,12 +814,6 @@ export default {
           this.$store.commit("clearToken");
           this.$router.push("/learning/login");
         });
-    },
-    clickLearning(id) {
-      this.$router.push({
-        name: "preface2",
-        params: { id: id },
-      });
     },
     currentDateTime() {
       const current = new Date();
@@ -838,6 +843,9 @@ export default {
 
         fullUri.click();
       });
+    },
+    moveUp() {
+      window.scrollTo(0, 0);
     },
   },
 };

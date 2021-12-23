@@ -10,7 +10,6 @@ use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
-
     public function teaching_time($id)
     {
         $lesson_synch = LessonSynch::join('subject_learnings', 'lesson_synch.subject_id', '=', 'subject_learnings.id')
@@ -107,6 +106,7 @@ class DashboardController extends Controller
             ->where('class_student.sync_id', '!=', null)
             ->where('class_student.count_progress', '!=', 100)
             ->where('class_student.user_id', '=', $id)
+            ->where('student_status', 1)
             ->count();
 
         $learnOffline = DB::table('class_student')
@@ -172,6 +172,7 @@ class DashboardController extends Controller
                         ->join('class_student', 'lesson_synch.sync_id', '=', 'class_student.sync_id')
                         ->where('lesson_synch.synch_status', '=', '1')
                         ->where('class_student.user_id', $id)
+                        ->where('student_status', 1)
                         ->where('lesson_synch.subject_id', '=', $item->subject_id)
                         ->select('subject_learnings.id', 'subject_learnings.subjectName', 'subject_learnings.image', 'subject_learnings.subjectType', 'subject_learnings.subjectId', 'class_student.student_status', 'class_student.class_id', 'lesson_synch.synch_starttime', 'lesson_synch.synch_endtime')
                         ->get();
@@ -213,8 +214,6 @@ class DashboardController extends Controller
                         ->where('synch_repeatday', $weekday)
                         ->whereTime('synch_starttime', '>', $tOff)
                         ->whereTime('synch_endtime', '>', $tOff)
-                        // ->whereTime('synch_starttime', '>', $tOff)
-                        // ->whereTime('synch_endtime', '>', $tOff)
                         ->select('subject_learnings.id', 'subject_learnings.subjectName', 'subject_learnings.image', 'subject_learnings.subjectType', 'subject_learnings.subjectId', 'class_student.student_status', 'class_student.class_id', 'lesson_synch.synch_starttime', 'lesson_synch.synch_endtime')
                         ->get();
 
@@ -235,6 +234,7 @@ class DashboardController extends Controller
             ->where('class_student.sync_id', '!=', null)
             ->where('class_student.count_progress', '!=', 100)
             ->where('class_student.user_id', '=', $id)
+            ->where('student_status', 1)
             ->select('count_progress', 'id', 'subjectName', 'subjectId')
             ->get();
 

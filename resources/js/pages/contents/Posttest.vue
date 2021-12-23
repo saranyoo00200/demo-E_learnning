@@ -184,7 +184,7 @@
                     สอบอีกครั้ง
                   </a>
                   <a
-                    @click="redirectLesson()"
+                    @click="redirectLesson(), moveUp()"
                     class="btn btn-primary float-middle"
                     bg-white
                     style="
@@ -395,6 +395,9 @@ export default {
     },
     redirectLesson() {
       this.$router.push("/learning/dashboard/lessons");
+    },
+    moveUp() {
+      window.scrollTo(0, 0);
     },
   },
 };

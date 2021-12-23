@@ -16,11 +16,6 @@
           class="carousel slide"
           data-ride="carousel"
         >
-          <!-- <ol class="carousel-indicators">
-          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-        </ol> -->
           <div class="carousel-inner">
             <div class="carousel-item active">
               <img
@@ -75,6 +70,7 @@
               v-for="category in categorys"
               :key="category.category_id"
               class="col-md-3 mb-4 logo"
+              @click.native="moveUp()"
               style="text-decoration: none; color: black"
               :to="{
                 name: 'content_categorie',
@@ -121,6 +117,7 @@
                         ></p>
                         <div class="btn">
                           <router-link
+                            @click.native="moveUp()"
                             :to="{
                               name: 'course_id',
                               params: { id: post.id },
@@ -143,12 +140,12 @@
 
             <router-link
               class="btn btn-info my-5"
+              @click.native="moveUp()"
               style="float: right; font-size: 15px; text-decoration: none"
               to="/lessonupdate"
               >ดูเพิ่มเติม <i class="fas fa-search"></i
             ></router-link>
           </div>
-          
         </div>
       </div>
     </div>
@@ -198,6 +195,9 @@ export default {
         .catch((err) => {
           this.error = "Error!!";
         });
+    },
+    moveUp() {
+      window.scrollTo(0, 0);
     },
   },
 };

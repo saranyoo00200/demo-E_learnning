@@ -14,19 +14,6 @@
         <div class="sidebar-menu-push">
           <!-- <div class="sidebar-menu-overlay"></div> -->
           <div class="sidebar-menu-inner">
-            <!-- <div class="page-heading">
-              <div class="container">
-                <div class="row">
-                  <div class="col-md-12">
-                    <div class="text-white" style="font-size:90px;"><i class="fas fa-newspaper" style="font-size:80px"></i> ข่าวสารต่างๆ</div>
-                    <span
-                      >Salvia next level crucifix pickled heirloom synth</span
-                    >
-                  </div>
-                </div>
-              </div>
-            </div> -->
-
             <section class="grid-news">
               <div class="container">
                 <div class="row">
@@ -56,102 +43,6 @@
                       </p>
                     </div>
                   </div>
-                  <!-- <div class="col-md-4">
-                    <div class="side-bar">
-                      <div class="search-box">
-                        <input
-                          type="text"
-                          class="search"
-                          name="s"
-                          placeholder="Search..."
-                          value=""
-                        />
-                      </div>
-                      <div class="categories">
-                        <div class="widget-heading">
-                          <h4>Categories</h4>
-                        </div>
-                        <ul>
-                          <li>
-                            <a href="#"
-                              ><i class="fa fa-angle-right"></i>Design</a
-                            >
-                          </li>
-                          <li>
-                            <a href="#"
-                              ><i class="fa fa-angle-right"></i>International</a
-                            >
-                          </li>
-                          <li>
-                            <a href="#"
-                              ><i class="fa fa-angle-right"></i>Learning</a
-                            >
-                          </li>
-                          <li>
-                            <a href="#"
-                              ><i class="fa fa-angle-right"></i>Read</a
-                            >
-                          </li>
-                          <li>
-                            <a href="#"
-                              ><i class="fa fa-angle-right"></i>Education</a
-                            >
-                          </li>
-                          <li>
-                            <a href="#"
-                              ><i class="fa fa-angle-right"></i>Finance</a
-                            >
-                          </li>
-                        </ul>
-                      </div>
-                      <div class="recent-news">
-                        <div class="widget-heading">
-                          <h4>Recent News</h4>
-                        </div>
-                        <ul>
-                          <router-link
-                            v-for="news in RecentNews.slice(0, 2)"
-                            :key="news.news_id"
-                            :to="{
-                              name: 'news_id',
-                              params: { id: news.news_id },
-                            }"
-                            @click.native="$router.go()"
-                          >
-                            <li>
-                              <a href=""
-                                ><img
-                                  :src="news.news_photo"
-                                  width="70px"
-                                  height="70px"
-                                  alt=""
-                              /></a>
-                              <a href="#"
-                                ><h6>{{ news.news_title }}</h6></a
-                              >
-                              <span>{{ format_date(news.created_at) }}</span>
-                            </li>
-                          </router-link>
-                        </ul>
-                      </div>
-                      <div class="tags">
-                        <div class="widget-heading">
-                          <h4>Tags</h4>
-                        </div>
-                        <ul>
-                          <li><a href="#">Photography</a></li>
-                          <li><a href="#">Design</a></li>
-                          <li><a href="#">Envanto</a></li>
-                          <li><a href="#">Course</a></li>
-                          <li><a href="#">Education</a></li>
-                          <li><a href="#">College</a></li>
-                          <li><a href="#">Teachers</a></li>
-                          <li><a href="#">Read</a></li>
-                          <li><a href="#">Excursions</a></li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div> -->
                 </div>
                 <a
                   class="btn btn-info mt-4"

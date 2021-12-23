@@ -52,6 +52,7 @@
                     v-for="Data in DataTeachers"
                     :key="Data.id"
                     class="col-md-3"
+                    @click.native="moveUp()"
                     style="text-decoration: none; color: black"
                     :to="{
                       name: 'teacher_id',
@@ -208,6 +209,9 @@ export default {
         .catch((err) => {
           console.log(err);
         });
+    },
+    moveUp() {
+      window.scrollTo(0, 0);
     },
   },
 };

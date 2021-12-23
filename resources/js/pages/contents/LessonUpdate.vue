@@ -29,46 +29,20 @@
                   style="height: 7rem"
                 ></p>
                 <router-link
+                  @click.native="moveUp()"
                   :to="{
                     name: 'course_id',
                     params: { id: post.id },
                   }"
-                  ><a class="btn btn-info mt-2 text-white">ดูรายละเอียด</a></router-link
+                  ><a class="btn btn-info mt-2 text-white"
+                    >ดูรายละเอียด</a
+                  ></router-link
                 >
               </div>
             </div>
           </div>
         </div>
 
-        <!-- <div class="row">
-
-          <div class="col-md-4 owl-carousel mt-3 slider">
-
-
-            <div v-for="post in posts" :key="post.id" class="card">
-              <div class="img">
-                <img :src="post.image" alt="" />
-              </div>
-              <div class="content">
-                <div class="title">{{ post.subjectName }}</div>
-
-                <div class="sub-title">
-                  <span class="dot-1"></span> {{ post.subjectType }}
-                </div>
-                <p :inner-html.prop="post.title | truncate(150)"></p>
-                <div class="btn">
-                  <router-link
-                    :to="{
-                      name: 'course_id',
-                      params: { id: post.id },
-                    }"
-                    ><button>View more</button></router-link
-                  >
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> -->
         <a
           class="btn btn-info my-5"
           @click="$router.go(-1)"
@@ -116,6 +90,9 @@ export default {
         .catch((err) => {
           this.error = "Error!!";
         });
+    },
+    moveUp() {
+      window.scrollTo(0, 0);
     },
   },
 };

@@ -28,15 +28,12 @@
               >
             </div>
             <div class="my-3">
-              <router-link
+              <a
                 v-show="this.learningOnline.synch_openpost == 1"
                 class="btn btn-danger mb-4"
                 style="float: right"
-                :to="{
-                  name: 'posttest',
-                  params: { id: this.$route.params.id },
-                }"
-                >แบบทดสอบหลังเรียน</router-link
+                @click="redirectPageToLesson(), moveUp()"
+                >แบบทดสอบหลังเรียน</a
               >
               <a
                 class="btn backbt"
@@ -94,6 +91,7 @@
                               class="page-item"
                             >
                               <a
+                                href="#"
                                 @click="DataLesson(pagination.path_page + n)"
                                 style="cursor: pointer"
                               >
@@ -115,11 +113,12 @@
                                   pagination.last_page,
                               }"
                             >
-                              <a v-if="pagination.current_page == 1"
+                              <a href="#" v-if="pagination.current_page == 1"
                                 ><i class="fa fa-arrow-left"></i
                               ></a>
                               <a
                                 v-else
+                                href="#"
                                 @click="
                                   DataLesson(
                                     pagination.path_page + pagination.prev_link
@@ -130,6 +129,7 @@
                             </li>
                             <li class="page-item">
                               <a
+                                href="#"
                                 v-if="
                                   pagination.current_page ==
                                   pagination.last_page
@@ -138,6 +138,7 @@
                               ></a>
                               <a
                                 v-else
+                                href="#"
                                 @click="
                                   DataLesson(
                                     pagination.path_page + pagination.next_link
@@ -157,6 +158,7 @@
             <div class="my-3">
               <router-link
                 v-show="this.checkRedirect == 1"
+                @click.native="moveUp()"
                 class="btn btn-danger mb-4"
                 style="float: left"
                 tage="button"
@@ -173,7 +175,7 @@
                     rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
                   margin-right: 10px;
                 "
-                @click="redirectPageToLesson"
+                @click="redirectPageToLesson(), moveUp()"
               >
                 แบบทดสอบหลังเรียน
               </button>
@@ -251,6 +253,9 @@ export default {
         .catch((err) => {
           this.error = "Error!!";
         });
+    },
+    moveUp() {
+      window.scrollTo(0, 0);
     },
     DataLesson(page) {
       page = page || "/api/lesson_learning/" + this.$route.params.id;

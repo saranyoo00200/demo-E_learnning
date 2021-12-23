@@ -40,6 +40,7 @@
                       </p>
                       <span v-for="(n, index) in subjectName" :key="index"
                         ><router-link
+                          @click.native="moveUp()"
                           :to="{
                             name: 'course_id',
                             params: { id: n.subject_id },
@@ -129,6 +130,9 @@ export default {
         .catch((error) => {
           console.log(error);
         });
+    },
+    moveUp() {
+      window.scrollTo(0, 0);
     },
   },
 };

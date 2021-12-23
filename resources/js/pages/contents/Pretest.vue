@@ -166,7 +166,7 @@
                 </div>
                 <div>
                   <button
-                    @click="resetQuiz"
+                    @click="resetQuiz(), moveUp()"
                     class="btn btn-primary float-middle"
                     bg-white
                     style="
@@ -330,6 +330,9 @@ export default {
         .catch((err) => {
           this.error = "Error!!";
         });
+    },
+    moveUp() {
+      window.scrollTo(0, 0);
     },
     saveCountProgress() {
       const config = {
