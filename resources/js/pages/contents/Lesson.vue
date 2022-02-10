@@ -59,7 +59,7 @@
                       class="mb-4"
                       :src="post.image"
                       alt=""
-                      width="700px"
+                      width="100%"
                       height=""
                     />
                   </div>
@@ -69,9 +69,13 @@
                       v-html="post.title"
                       style="text-align: left"
                     ></p>
-                    <video width="800px" controls>
-                      <source :src="post.vdo" type="video/mp4" />
-                    </video>
+                    <video
+                      class="shadow"
+                      :src="post.vdo"
+                      :poster="post.image"
+                      width="75%"
+                      controls
+                    ></video>
                   </div>
                 </div>
               </div>
