@@ -156,18 +156,21 @@ class SubjectLearningController extends Controller
             ->where('posttest_scores.users_id', $id)
             ->select('subject_learnings.id', 'subject_learnings.subjectId', 'subject_learnings.subjectName', 'posttest_scores.score')
             ->get();
-        foreach ($scorePre as $key => $value) {
-            $scoreAll = DB::table('posttest_exams')
-                ->where('posttest_exams.subject_id', $value->id)
-                ->count();
+        $data = [];
+        if ($scorePre) {
+            foreach ($scorePre as $key => $value) {
+                $scoreAll = DB::table('posttest_exams')
+                    ->where('posttest_exams.subject_id', $value->id)
+                    ->count();
 
-            $data[] = [
-                'id' => $value->id,
-                'subjectId' => $value->subjectId,
-                'subjectName' => $value->subjectName,
-                'score' => $value->score,
-                'scoreAll' => $scoreAll,
-            ];
+                $data[] = [
+                    'id' => $value->id,
+                    'subjectId' => $value->subjectId,
+                    'subjectName' => $value->subjectName,
+                    'score' => $value->score,
+                    'scoreAll' => $scoreAll,
+                ];
+            }
         }
 
         return response()->json($data, 200);
@@ -275,72 +278,59 @@ class SubjectLearningController extends Controller
             ->where('lesson_synch.sync_id', $sync_id)
             ->get();
 
-        $data_form_count = $data_form_check_data_form->count();
-
         foreach ($data_form_check_data_form as $value) {
             $start_time = $value->synch_starttime;
             $endtime = $value->synch_endtime;
             $synch_repeatday = $value->synch_repeatday;
 
-            $data_form_with_data_form_week = LessonSynch::join('synch_repeatday', 'synch_repeatday.sync_id', '=', 'lesson_synch.sync_id')
+            $data_with_data_timer_whereBetween = LessonSynch::join('synch_repeatday', 'synch_repeatday.sync_id', '=', 'lesson_synch.sync_id')
                 ->join('calendar_simulations', 'lesson_synch.sync_id', '=', 'calendar_simulations.sync_id')
-                ->where('calendar_simulations.sync_id', '!=', $sync_id)
-                ->where('synch_repeatday', $synch_repeatday)
-                ->get();
+                ->where('synch_repeatday.sync_id', '!=', $sync_id)
+                ->where('calendar_simulations.user_id', $user_id)
+                ->where('synch_repeatday.synch_repeatday', $synch_repeatday)
+                ->whereBetween('synch_starttime', [$start_time, $endtime])
+                ->whereBetween('synch_endtime', [$start_time, $endtime])
+                ->count();
 
-            if ($data_form_with_data_form_week != '') {
-                foreach ($data_form_with_data_form_week as $key => $value) {
-                    $data_with_data_timer = LessonSynch::join('synch_repeatday', 'synch_repeatday.sync_id', '=', 'lesson_synch.sync_id')
-                        ->join('calendar_simulations', 'lesson_synch.sync_id', '=', 'calendar_simulations.sync_id')
-                        ->where('calendar_simulations.sync_id', '!=', $sync_id)
-                        ->whereBetween('synch_starttime', [$start_time, $endtime])
-                        ->orWhereBetween('synch_endtime', [$start_time, $endtime])
-                        ->count();
-                }
-            }
+            $data_with_data_timer_whereNotBetween = LessonSynch::join('synch_repeatday', 'synch_repeatday.sync_id', '=', 'lesson_synch.sync_id')
+                ->join('calendar_simulations', 'lesson_synch.sync_id', '=', 'calendar_simulations.sync_id')
+                ->where('synch_repeatday.sync_id', '!=', $sync_id)
+                ->where('calendar_simulations.user_id', $user_id)
+                ->where('synch_repeatday.synch_repeatday', $synch_repeatday)
+                ->whereNotBetween('synch_starttime', [$start_time, $endtime])
+                ->whereNotBetween('synch_endtime', [$start_time, $endtime])
+                ->count();
         }
-        if ($data_with_data_timer > $data_form_count) {
+        if ($data_with_data_timer_whereBetween > 0 && $data_with_data_timer_whereNotBetween > 0) {
             return response()->json(['data' => true], 200);
         }
+        // return response()->json([[$data_with_data_timer_whereBetween, $data_with_data_timer_whereNotBetween], [$start_time, $endtime]], 200);
+        // dd($data_with_data_timer);
 
         ///////////////////////////////////////////data_form_with_data_system/////////////////////////////////////////////////////////////////
         $data_form = LessonSynch::join('synch_repeatday', 'synch_repeatday.sync_id', '=', 'lesson_synch.sync_id')
             ->where('lesson_synch.sync_id', $sync_id)
             ->get();
 
-        $data_form_system_count = $data_form->count();
-
         foreach ($data_form as $value) {
-            $start_date = $value->start_date;
-            $end_date = $value->end_date;
             $start_time = $value->synch_starttime;
             $endtime = $value->synch_endtime;
             $synch_repeatday = $value->synch_repeatday;
 
-            $data_in_system_date_and_week = LessonSynch::join('synch_repeatday', 'synch_repeatday.sync_id', '=', 'lesson_synch.sync_id')
+            $data_in_system_timer = LessonSynch::join('synch_repeatday', 'synch_repeatday.sync_id', '=', 'lesson_synch.sync_id')
                 ->join('class_student', 'synch_repeatday.sync_id', '=', 'class_student.sync_id')
-                ->where('synch_repeatday', $synch_repeatday)
+                ->where('lesson_synch.sync_id', '!=', $sync_id)
                 ->where('class_student.user_id', $user_id)
-                ->whereBetween('start_date', [$start_date, $end_date])
-                ->whereBetween('end_date', [$start_date, $end_date])
-                ->get();
-
-            if ($data_in_system_date_and_week != '') {
-                foreach ($data_in_system_date_and_week as $key => $value) {
-                    $data_in_system_timer = LessonSynch::join('synch_repeatday', 'synch_repeatday.sync_id', '=', 'lesson_synch.sync_id')
-                        ->join('class_student', 'synch_repeatday.sync_id', '=', 'class_student.sync_id')
-                        ->where('class_student.user_id', $user_id)
-                        ->WhereBetween('synch_starttime', [$start_time, $endtime])
-                        ->orWhereBetween('synch_endtime', [$start_time, $endtime])
-                        ->count();
-                }
-            }
+                ->where('synch_repeatday.synch_repeatday', $synch_repeatday)
+                ->WhereBetween('synch_starttime', [$start_time, $endtime])
+                ->WhereBetween('synch_endtime', [$start_time, $endtime])
+                ->count();
         }
-        // return response()->json($data_in_system_timer, 200);
-        if ($data_in_system_timer > $data_form_system_count) {
+        // dd($data_in_system_timer);
+        if ($data_in_system_timer > 0) {
             return response()->json(['data' => true], 200);
         }
-
+        // return response()->json([$data_in_system_timer, [$start_time, $endtime]], 200);
         ///////////////////////////////////////////create_class_lesson/////////////////////////////////////////////////////////////////
         // dd($request->all());
 

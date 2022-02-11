@@ -143,7 +143,7 @@ export default {
       axios
         .get("/api/my_subject_leasson/" + this.$store.state.user_id)
         .then((res) => {
-          this.loading = false;
+          //   this.loading = false;
           if (res.data != "") {
             this.DataCalendar();
           }
@@ -173,7 +173,7 @@ export default {
       axios
         .get("/api/showdata_time_simulations/" + this.$store.state.user_id)
         .then((res) => {
-          //   console.log(res.data);
+          // console.log(res.data);
           this.currentCompare = [];
           this.calendarOptions.events = [];
           for (let i = 0; i < res.data.length; i++) {
@@ -188,8 +188,8 @@ export default {
               title: res.data[i].title,
             };
           }
-          // console.log(this.currentCompare);
-          //   this.loading = false;
+          //   console.log(this.currentCompare);
+          this.loading = false;
         })
         .catch((err) => {
           this.error = "Error!!";
@@ -199,23 +199,20 @@ export default {
       axios
         .get("/api/show_data_simulations/" + this.$store.state.user_id)
         .then((res) => {
-          // console.log(res.data);
+          // console.log(res.data.length);
+          this.sentDataRegister = [];
           this.dataSimulations = res.data;
           for (let i = 0; i < res.data.length; i++) {
             axios
               .get("/api/check_sync_to_subject_id/" + res.data[i].subject_id)
               .then((res) => {
-                // console.log(res.data.check_data);
-                this.sentDataRegister = [];
-                for (let i = 0; i < res.data.check_data.length; i++) {
-                  this.sentDataRegister.push({
-                    subject_id: res.data.check_data[i].subject_id,
-                    sync_id: res.data.check_data[i].sync_id,
-                    user_add: this.$store.state.user_id,
-                  });
-                }
+                // console.log(res.data.data);
+                this.sentDataRegister.push({
+                  subject_id: res.data.check_data[0].subject_id,
+                  sync_id: res.data.check_data[0].sync_id,
+                  user_add: this.$store.state.user_id,
+                });
 
-                this.check_sync_to_subject_id = [];
                 for (let i = 0; i < res.data.data.length; i++) {
                   this.check_sync_to_subject_id[i] = {
                     end: res.data.data[i].end,
@@ -231,6 +228,8 @@ export default {
                 console.log(error);
               });
           }
+          //   console.log(this.sentDataRegister);
+          //   console.log(this.calendarOptions.events);
           this.loading = false;
         })
         .catch((err) => {
@@ -249,8 +248,7 @@ export default {
         });
     },
     createRegister() {
-      // console.log(this.sentDataRegister);
-      //   console.log(this.currentCompare);
+      //   console.log(this.sentDataRegister);
       if (this.sentDataRegister[0] != undefined) {
         if (confirm("ยืนยันการลงทะเบียน")) {
           for (let i = 0; i < this.sentDataRegister.length; i++) {
@@ -262,12 +260,10 @@ export default {
                 ).content,
               },
             };
-
             let formData = new FormData();
             formData.append("user_id", this.$store.state.user_id);
             formData.append("sync_id", this.sentDataRegister[i].sync_id);
             formData.append("subject_id", this.sentDataRegister[i].subject_id);
-
             axios
               .post("/api/select_subject", formData, config)
               .then((res) => {

@@ -127,7 +127,7 @@
                   this.$store.state.user_type == 1 ||
                   this.$store.state.user_type == ''
                 "
-                @click="clickRegisterSubject"
+                @click="[clickRegisterSubject(), moveUp()]"
                 class="boxbt2 text-white"
                 style="cursor: pointer; text-decoration: none"
                 >ลงทะเบียน</a
