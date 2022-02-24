@@ -782,6 +782,7 @@ export default {
       axios
         .get("/api/teaching_time/" + this.$store.state.user_id)
         .then((res) => {
+          // console.log(res.data);
           this.calendarOptions.events = [];
           for (let i = 0; i < res.data.length; i++) {
             this.calendarOptions.events[i] = {
@@ -804,7 +805,7 @@ export default {
           for (let i = 0; i < res.data.length; i++) {
             if (res.data[i].count_progress != 100) {
               this.show_subject_leasson_left++;
-              console.log(this.show_subject_leasson_left);
+              //   console.log(this.show_subject_leasson_left);
             }
           }
           this.DataProgress = res.data;

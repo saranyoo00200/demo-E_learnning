@@ -273,6 +273,16 @@ class SubjectLearningController extends Controller
         $data_in_system_timer = 0;
         $data_with_data_timer = 0;
 
+        if ($request->sync_id == '') {
+            $input['subject_id'] = $request->subject_id;
+            $input['user_id'] = $request->user_add;
+            $input['sync_id'] = $request->sync_id;
+            $input['student_status'] = 1;
+            $input['count_progress'] = 0;
+            ClassStudent::create($input);
+            return response()->json(['msg' => 'success!!'], 200);
+        }
+
         ///////////////////////////////////////////data_form_with_data_form/////////////////////////////////////////////////////////////////
         $data_form_check_data_form = LessonSynch::join('synch_repeatday', 'synch_repeatday.sync_id', '=', 'lesson_synch.sync_id')
             ->where('lesson_synch.sync_id', $sync_id)
@@ -371,15 +381,6 @@ class SubjectLearningController extends Controller
             return response()->json(['msg' => 'success!!'], 200);
         }
         // dd($sync_id);
-        if ($request->sync_id == '') {
-            $input['subject_id'] = $request->subject_id;
-            $input['user_id'] = $request->user_add;
-            $input['sync_id'] = $request->sync_id;
-            $input['student_status'] = 1;
-            $input['count_progress'] = 0;
-            ClassStudent::create($input);
-            return response()->json(['msg' => 'success!!'], 200);
-        }
     }
 
     /**

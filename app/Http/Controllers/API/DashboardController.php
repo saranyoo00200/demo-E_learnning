@@ -18,6 +18,8 @@ class DashboardController extends Controller
             ->orderBy('lesson_synch.sync_id', 'desc')
             // ->select('subject_learnings.subjectName', 'lesson_synch.start_date', 'lesson_synch.end_date', 'lesson_synch.synch_starttime', 'lesson_synch.synch_endtime', 'synch_repeatday.synch_repeatday')
             ->get();
+            
+        $data = [];
         foreach ($lesson_synch as $key => $value) {
             $startDate = new \DateTime($value->start_date);
             $enddate_convert = date_create($value->end_date);
