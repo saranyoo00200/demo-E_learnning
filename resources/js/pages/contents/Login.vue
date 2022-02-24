@@ -51,9 +51,9 @@
                   >จดจำรหัสผ่าน</label
                 >
               </div> -->
-              <div class="mb-3 float-right">
+              <!-- <div class="mb-3 float-right">
                 <a href="/password/reset"><u>ลืมรหัสผ่าน</u></a>
-              </div>
+              </div> -->
               <button
                 class="btn btn-lg btn-primary btn-block text-uppercase"
                 type="submit"
