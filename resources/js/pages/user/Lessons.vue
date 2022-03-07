@@ -852,19 +852,24 @@ export default {
           for (let index = 0; index < res.data.length; index++) {
             if (res.data[index].student_status == 1) {
               axios
-                .get("/api/showdata_time/" + this.$store.state.user_id)
+                .get(
+                  "/api/lesson_learning/learning_online/" +
+                    this.$store.state.user_id
+                )
                 .then((res) => {
-                  for (let i = 0; i < res.data.length; i++) {
+                  for (
+                    let chClass = 0;
+                    chClass < this.my_subject_leassons.length;
+                    chClass++
+                  ) {
                     if (
-                      this.curreentTime >= res.data[i].start &&
-                      this.curreentTime <= res.data[i].end
+                      res.data[chClass].id == this.my_subject_leassons[index].id
                     ) {
-                      if (this.data[index].subjectName == res.data[i].title) {
-                        this.data[index].attendClass++;
-                      }
+                      this.my_subject_leassons[index].attendClass = 1;
+                    } else {
+                      this.my_subject_leassons[index].attendClass = 0;
                     }
                   }
-                  this.loading = false;
                 })
                 .catch((err) => {
                   this.error = "Error!!";

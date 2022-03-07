@@ -170,7 +170,7 @@
                   <li><hr class="dropdown-divider" /></li>
                   <li>
                     <a @click="logout" type="button" class="dropdown-item"
-                      ><i class="bx bx-log-out" id="log_out"> Log Out</i></a
+                      ><i class="bx bx-log-out" id="log_out"> ออกจากระบบ</i></a
                     >
                   </li>
                 </ul>
@@ -184,7 +184,7 @@
                   class="login btn action-button text-bold text-white"
                   href="#"
                   style="text-decoration: none"
-                  ><i class="fas fa-user"></i> Log In</a
+                  ><i class="fas fa-user"></i> เข้าสู่ระบบ</a
                 ></span
               ></router-link
             >
@@ -195,7 +195,7 @@
                   role="button"
                   href="#"
                   style="border-radius: 50px"
-                  >Signup</a
+                  >สมัครสมาชิก</a
                 >
               </span>
             </router-link>

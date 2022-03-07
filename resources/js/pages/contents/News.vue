@@ -47,7 +47,7 @@
                               <div class="content" style="cursor: default">
                                 <ul>
                                   <li>
-                                    Posted:
+                                    โพสต์:
                                     <em>{{ format_date(news.created_at) }}</em>
                                   </li>
                                 </ul>

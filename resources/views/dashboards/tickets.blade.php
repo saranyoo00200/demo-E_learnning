@@ -3,12 +3,12 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>Help</h1>
+            <h1>การติดต่อ</h1>
         </div>
         <div class="section-body">
             <div class="card">
                 <div class="card-header">
-                    <h4>Help text</h4>
+                    <h4>ข้อมูลการติดต่อ</h4>
                 </div>
                 @foreach ($tickets as $item)
                     <div class="card-body">

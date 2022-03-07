@@ -4,50 +4,30 @@
       <div class="row">
         <div class="col-md-3">
           <div class="footer-widget">
-            <div class="educa-info">
+            <div class="educa-logo">
               <img
                 src="/assets/frontend/images/logo-elearning2.png"
                 width="170px"
                 alt=""
               />
-              <div class="line-dec"></div>
-              <p>
+              <!-- <div class="line-dec"></div> -->
+              <!-- <p>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 Excepturi ullam eius necessitatibus neque. Qui neque a ratione
                 molestiae dicta quaerat magni nisi enim, fugit itaque eum,
                 pariatur expedita deserunt magnam!
-              </p>
+              </p> -->
               <!-- <div class="text-button">
                 <a href="#" style="text-decoration: none"
                   >Read More <i class="fa fa-arrow-right"></i
                 ></a>
               </div> -->
-              <div class="social mt-2 mb-3">
+              <!-- <div class="social mt-2 mb-3">
                 <i class="fa fa-facebook-official fa-lg mr-1"></i>
                 <i class="fa fa-instagram fa-lg mr-1"></i>
                 <i class="fa fa-twitter fa-lg mr-1"></i>
                 <i class="fa fa-linkedin-square fa-lg mr-1"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="footer-widget">
-            <div class="featured-links">
-              <h2>เว็บไซต์แนะนำ</h2>
-              <div class="line-dec"></div>
-              <ul>
-                <li><a href="#">Graduation</a></li>
-                <li><a href="#">Admissions</a></li>
-                <li><a href="#">International</a></li>
-                <li><a href="#">FAQs</a></li>
-              </ul>
-              <ul>
-                <li><a href="#">Courses</a></li>
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Bookstore</a></li>
-                <li><a href="#">Alumni</a></li>
-              </ul>
+              </div> -->
             </div>
           </div>
         </div>
@@ -83,6 +63,22 @@
             </div>
           </div>
         </div>
+        <div class="col-md-3">
+          <div class="footer-widget">
+            <div class="featured-links">
+              <h2>โซเชียลมีเดีย</h2>
+              <div class="line-dec"></div>
+              <div class="social mt-2 mb-3">
+                <a href="#"
+                  ><i class="fa fa-facebook-official fa-lg mr-1"></i
+                ></a>
+                <a href="#"><i class="fa fa-instagram fa-lg mr-1"></i></a>
+                <a href="#"><i class="fa fa-twitter fa-lg mr-1"></i></a>
+                <a href="#"><i class="fa fa-linkedin-square fa-lg mr-1"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="row">
         <div class="col-12">
@@ -90,19 +86,20 @@
             <div class="row">
               <div class="col-sm-4">
                 <div class="copyright-text">
-                  <p>@ Copyright 2021 E-Learning, website.</p>
+                  <p>
+                    @ Copyright {{ new Date().getFullYear() }} E-Learning,
+                    website.
+                  </p>
                 </div>
               </div>
               <div class="col-sm-8">
                 <div class="menu">
                   <ul>
                     <li>
-                      <a href="#" class="btn btn-info text-white">หน้าหลัก</a>
+                      <a href="/" class="btn btn-info text-white">หน้าหลัก</a>
                     </li>
                     <li>
-                      <a
-                        href="/learning/course"
-                        class="btn btn-info text-white"
+                      <a href="/learning/course" class="btn btn-info text-white"
                         >คอร์สเรียน</a
                       >
                     </li>
@@ -172,5 +169,16 @@ h6 {
 }
 .btn-footer:hover {
   background: #d43a3f;
+}
+.social a {
+  color: #333;
+  padding: 5px;
+  transition: 0.3s;
+}
+.social a:hover {
+  color: #f5a425;
+}
+.social a:nth-child(1) {
+  padding-left: 0;
 }
 </style>

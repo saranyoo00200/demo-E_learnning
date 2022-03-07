@@ -65,7 +65,7 @@
                         <a href="#"
                           ><h4>{{ Data.name }}</h4></a
                         >
-                        <span><b>Teacher</b></span>
+                        <span><b>อาจารย์</b></span>
                         <hr />
                       </div>
                     </div>

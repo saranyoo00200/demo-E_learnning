@@ -50,8 +50,8 @@
                             <thead>
                                 <tr>
                                     <th scope="col" width="10%"><i class="fas fa-th"></i></th>
-                                    <th scope="col">Username</th>
-                                    <th scope="col">ชื่อ-นามสกุล</th>
+                                    <th scope="col">รหัสผู้ใช้</th>
+                                    <th scope="col">ชื่อผู้ใช้</th>
                                     <th scope="col">สถานะ</th>
                                     <th scope="col">ประเภทผู้ใช้งาน</th>
                                     <th scope="col">เครื่องมือ</th>

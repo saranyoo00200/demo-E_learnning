@@ -21,7 +21,7 @@
                         type="search"
                         v-model="search"
                         class="form-control my-3"
-                        placeholder="Search..."
+                        placeholder="ค้นหา"
                       />
                     </div>
                   </div>
@@ -44,7 +44,8 @@
                       <div class="flex-grow-1 ml-3">
                         {{ fr.subjectName }}
                         <div class="small">
-                          <span class="fas fa-circle chat-online"></span> Online
+                          <span class="fas fa-circle chat-online"></span>
+                          ออนไลน์
                         </div>
                       </div>
                     </div>
@@ -153,7 +154,7 @@
                     <input
                       type="text"
                       class="form-control"
-                      placeholder="Type your message"
+                      placeholder="พิมพ์ข้อความของคุณ"
                       v-model="messageText"
                       @keyup.enter="sendMessage"
                     />
@@ -162,7 +163,7 @@
                       type="button"
                       @click="sendMessage"
                     >
-                      Send
+                      ส่ง
                     </button>
                   </div>
                 </div>

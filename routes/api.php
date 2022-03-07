@@ -83,6 +83,7 @@ Route::get('/news_id', [NewsController::class, 'news_id']);
 
 //lesson
 Route::get('/lesson_learning/{id}', [LessonController::class, 'index']);
+Route::get('/lesson_learning/learning_online/{id}', [LessonController::class, 'learning_online']);
 Route::get('/export_pdf/{type}/{id}', [LessonController::class, 'export_pdf']);
 
 // quize---

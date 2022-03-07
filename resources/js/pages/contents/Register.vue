@@ -21,7 +21,7 @@
                     class="form-input col-md-12 mb-2"
                     v-bind:class="{ mx_recaptcha_failed: validatorName }"
                   >
-                    <label for="inputName">Name</label>
+                    <label for="inputName">ชื่อผู้ใช้</label>
                     <input
                       v-model="credentials.name"
                       id="inputName"
@@ -37,14 +37,14 @@
                     class="form-input col-md-12 mb-2"
                     v-bind:class="{ mx_recaptcha_failed: validatorUsername }"
                   >
-                    <label for="inputUsername">Username</label>
+                    <label for="inputUsername">รหัสผู้ใช้</label>
                     <input
                       v-model="credentials.username"
                       id="inputUsername"
                       type="text"
                       name="username"
                       class="form-control"
-                      placeholder="username"
+                      placeholder="รหัสผู้ใช้"
                       required
                     />
                     <small class="mt-2">มีผู้ใช้ username นี้อยู่แล้ว!</small>
@@ -54,7 +54,7 @@
                   class="form-input mb-2"
                   v-bind:class="{ mx_recaptcha_failed: validatorEmail }"
                 >
-                  <label for="inputEmail">Email</label>
+                  <label for="inputEmail">อีเมล</label>
                   <input
                     v-model="credentials.email"
                     id="inputEmail"
@@ -70,7 +70,7 @@
                   class="form-input mb-2"
                   v-bind:class="{ mx_recaptcha_failed: validatorPassword }"
                 >
-                  <label for="inputPassword">Password</label>
+                  <label for="inputPassword">รหัสผ่าน</label>
                   <input
                     v-model="credentials.password"
                     id="inputPassword"
@@ -84,7 +84,7 @@
                 </div>
                 <div class="form-input mb-2">
                   <label for="inputPassword_confirmation"
-                    >Password confirm</label
+                    >ยืนยันรหัสผ่าน</label
                   >
                   <input
                     v-model="credentials.password_confirmation"
@@ -113,11 +113,11 @@
                   ยืนยัน
                 </button>
                 <div class="text-center mt-4">
-                  <span>Already a member?</span>
+                  <span>เป็นสมาชิกอยู่แล้ว?</span>
                   <router-link
                     :to="{ name: 'login' }"
                     class="text-decoration-none"
-                    >Login</router-link
+                    >เข้าสู้ระบบ</router-link
                   >
                 </div>
                 <hr class="my-4" />

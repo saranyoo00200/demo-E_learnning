@@ -249,7 +249,7 @@
                                     </tr>
                                     @foreach ($student as $item)
                                         <tr>
-                                            <td><a href="#">LE-{{ $item->id }}</a></td>
+                                            <td><a href="#">{{ $item->id }}</a></td>
                                             <td class="font-weight-600">{{ $item->name }}</td>
                                             <td>
                                                 @if ($item->user_status == 1)
@@ -307,7 +307,7 @@
                                 <i class="far fa-question-circle"></i>
                             </div>
                             <h4>{{ $tickets_count }}</h4>
-                            <div class="card-description">Customers need help</div>
+                            <div class="card-description">การติดต่อ</div>
                         </div>
                         <div class="card-body p-0">
                             <div class="tickets-list my-custom-scrollbar">

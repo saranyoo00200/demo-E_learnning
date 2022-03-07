@@ -65,7 +65,7 @@
                                   >
                                 </div>
                                 <i class="fa fa-fw fa-camera"></i>
-                                <span>Change Photo</span>
+                                <span>เปลี่ยนรูป</span>
                                 <div class="mt-2">
                                   <button class="btn btn-info" type="button">
                                     <input
@@ -80,14 +80,14 @@
                               </div>
                               <div class="text-center text-sm-right">
                                 <div class="text-muted">
-                                  <small>Today: {{ currentDateTime() }}</small>
+                                  <small>วันที่: {{ currentDateTime() }}</small>
                                 </div>
                               </div>
                             </div>
                           </div>
                           <ul class="nav nav-tabs">
                             <li class="nav-item">
-                              <a href="" class="active nav-link">Settings</a>
+                              <a href="" class="active nav-link">การตั้งค่า</a>
                             </li>
                           </ul>
                           <div class="tab-content pt-3">
@@ -113,7 +113,7 @@
                                     <div class="col">
                                       <div class="form-group">
                                         <label style="float: left"
-                                          >ไอดีผู้ใช้</label
+                                          >รหัสผู้ใช้</label
                                         >
                                         <input
                                           v-model="FormProfile.username"
@@ -129,9 +129,7 @@
                                   <div class="row">
                                     <div class="col">
                                       <div class="form-group">
-                                        <label style="float: left"
-                                          >อีเมล์</label
-                                        >
+                                        <label style="float: left">อีเมล</label>
                                         <input
                                           v-model="FormProfile.email"
                                           class="form-control"
@@ -323,6 +321,7 @@ export default {
         (current.getDate() < 10 ? "0" : "") +
         current.getDate() +
         "-" +
+        (current.getMonth() < 9 ? "0" : "") +
         (current.getMonth() + 1) +
         "-" +
         (current.getFullYear() + 543);
@@ -347,7 +346,7 @@ export default {
 
       //   this.filename = "Selected File: " + e.target.files[0].name;
       this.file_photo = e.target.files[0];
-    //   console.log(this.file_photo);
+      //   console.log(this.file_photo);
     },
     updateProFile(e) {
       e.preventDefault();

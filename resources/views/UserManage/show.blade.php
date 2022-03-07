@@ -32,13 +32,13 @@
                    <div class="row">
                      <div class="col-md-6">
                          <div class="form-group">
-                              <label class="font-weight-bold"><b>Username</b></label>
+                              <label class="font-weight-bold"><b>รหัสผู้ใช้</b></label>
                               <p>{{ $user->username }}</p>
                           </div>
                      </div>
                      <div class="col-md-6">
                        <div class="form-group">
-                            <label class="font-weight-bold">ชื่อ-นามสกุล</label>
+                            <label class="font-weight-bold">ชื่อผู้ใช้</label>
                             <p>{{ $user->name }}</p>
                         </div>
                      </div>

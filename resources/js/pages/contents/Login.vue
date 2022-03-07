@@ -15,7 +15,7 @@
             <h5 class="card-title text-center">เข้าสู่ระบบ</h5>
             <form class="form-signin" method="POST" v-on:submit.prevent="login">
               <div class="form-label-group mb-3">
-                <label for="inputUsername">Username</label>
+                <label for="inputUsername">รหัสผู้ใช้</label>
                 <input
                   v-model="credentials.username"
                   type="text"
@@ -29,7 +29,7 @@
               </div>
 
               <div class="form-label-group mb-3">
-                <label for="inputPassword">Password</label>
+                <label for="inputPassword">รหัสผ่าน</label>
                 <input
                   v-model="credentials.password"
                   type="password"
@@ -40,20 +40,6 @@
                   required
                 />
               </div>
-
-              <!-- <div class="custom-control custom-checkbox mb-3">
-                <input
-                  type="checkbox"
-                  class="custom-control-input"
-                  id="rememberMe"
-                />
-                <label class="custom-control-label" for="rememberMe"
-                  >จดจำรหัสผ่าน</label
-                >
-              </div> -->
-              <!-- <div class="mb-3 float-right">
-                <a href="/password/reset"><u>ลืมรหัสผ่าน</u></a>
-              </div> -->
               <button
                 class="btn btn-lg btn-primary btn-block text-uppercase"
                 type="submit"

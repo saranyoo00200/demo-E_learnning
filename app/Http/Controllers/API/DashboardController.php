@@ -18,7 +18,7 @@ class DashboardController extends Controller
             ->orderBy('lesson_synch.sync_id', 'desc')
             // ->select('subject_learnings.subjectName', 'lesson_synch.start_date', 'lesson_synch.end_date', 'lesson_synch.synch_starttime', 'lesson_synch.synch_endtime', 'synch_repeatday.synch_repeatday')
             ->get();
-            
+
         $data = [];
         foreach ($lesson_synch as $key => $value) {
             $startDate = new \DateTime($value->start_date);
@@ -195,8 +195,6 @@ class DashboardController extends Controller
                         ->where('synch_repeatday', $weekday)
                         ->whereTime('synch_starttime', '<', $tOff)
                         ->whereTime('synch_endtime', '<', $tOff)
-                        // ->whereTime('synch_starttime', '>', $tOff)
-                        // ->whereTime('synch_endtime', '>', $tOff)
                         ->select('subject_learnings.id', 'subject_learnings.subjectName', 'subject_learnings.image', 'subject_learnings.subjectType', 'subject_learnings.subjectId', 'class_student.student_status', 'class_student.class_id', 'lesson_synch.synch_starttime', 'lesson_synch.synch_endtime')
                         ->get();
 

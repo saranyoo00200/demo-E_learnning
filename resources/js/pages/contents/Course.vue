@@ -181,7 +181,7 @@
                   type="button"
                   @click="$router.go(-1)"
                   style="text-decoration: none; color: white; float: right"
-                  ><i class="fas fa-chevron-left"></i> Back
+                  ><i class="fas fa-chevron-left"></i> กลับ
                 </a>
               </div>
             </section>

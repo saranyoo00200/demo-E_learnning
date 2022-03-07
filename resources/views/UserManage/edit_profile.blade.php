@@ -23,14 +23,14 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>ชื่อ-นามสกุล</label>
+                                            <label>ชื่อผู้ใช้</label>
                                             <input type="text" class="form-control" name="name" id="name"
                                                 value="{{ $user->name }}">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Username</label>
+                                            <label>รหัสผู้ใช้</label>
                                             <input type="text" class="form-control" name="username" id="username"
                                                 value="{{ $user->username }}" readonly>
                                         </div>
@@ -51,14 +51,14 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Password</label>
+                                            <label>รหัสผ่าน</label>
                                             <input type="password" class="form-control" name="password" id="password"
                                                 value="" placeholder="********">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Confirm Password</label>
+                                            <label>ยืนยันรหัสผ่าน</label>
                                             <input type="password" class="form-control" name="" id="confirm_password"
                                                 placeholder="********">
                                         </div>

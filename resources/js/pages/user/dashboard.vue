@@ -234,7 +234,7 @@
                   ml-4
                 "
               >
-                วิชาเรียนวันนี้มี...
+                วิชาเรียนวันนี้
               </div>
               <div class="card-body">
                 <table class="table table-hover text-center">
@@ -758,7 +758,7 @@ export default {
       axios
         .get("/api/index/" + this.$store.state.user_id + "/dashboard")
         .then((res) => {
-          // console.log(res.data);
+          console.log(res.data);
           this.data_learn_online = res.data.data_learn_online;
           this.data_learn_offline_max = res.data.data_learn_offline_max;
           this.data_learn_offline_min = res.data.data_learn_offline_min;
