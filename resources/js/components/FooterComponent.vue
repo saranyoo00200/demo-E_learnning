@@ -55,10 +55,9 @@
               <h2>ข่าว</h2>
               <div class="line-dec"></div>
               <p>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vitae
-                placeat aspernatur ipsa corporis quidem quas saepe vel ratione,
-                et ex possimus eligendi qui, perferendis consequuntur molestiae
-                dolores distinctio sequi quasi.
+                ระบบจัดการเรียนการสอนออนไลน์ที่ให้ผู้เรียนสามารถแสวงหาความรู้ด้วยตนเองได้อย่างไม่มีข้อจำกัด                ด้านเวลา สถานที่ และที่สำคัญคือ ฟรี
+                เรามีคอร์สเรียนที่น่าสนใจมากมาย มีเนื้อหาครอบคลุมทุกสาขาวิชา
+                ส่งเสริมให้คนไทยมีการเรียนรู้ตลอดชีวิตและเพิ่มทักษะให้กับตนเองอยู่เสมอ
               </p>
             </div>
           </div>
