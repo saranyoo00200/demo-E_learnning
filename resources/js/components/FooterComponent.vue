@@ -10,24 +10,6 @@
                 width="170px"
                 alt=""
               />
-              <!-- <div class="line-dec"></div> -->
-              <!-- <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Excepturi ullam eius necessitatibus neque. Qui neque a ratione
-                molestiae dicta quaerat magni nisi enim, fugit itaque eum,
-                pariatur expedita deserunt magnam!
-              </p> -->
-              <!-- <div class="text-button">
-                <a href="#" style="text-decoration: none"
-                  >Read More <i class="fa fa-arrow-right"></i
-                ></a>
-              </div> -->
-              <!-- <div class="social mt-2 mb-3">
-                <i class="fa fa-facebook-official fa-lg mr-1"></i>
-                <i class="fa fa-instagram fa-lg mr-1"></i>
-                <i class="fa fa-twitter fa-lg mr-1"></i>
-                <i class="fa fa-linkedin-square fa-lg mr-1"></i>
-              </div> -->
             </div>
           </div>
         </div>

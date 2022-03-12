@@ -434,6 +434,11 @@
                       </td>
                     </tr>
                   </tbody>
+                  <tbody v-show="learnOnlines == ''" class="text-center">
+                    <tr>
+                      <th scope="row" colspan="3">ไม่มีข้อมูล</th>
+                    </tr>
+                  </tbody>
                 </table>
               </div>
             </div>
@@ -501,6 +506,11 @@
                           </div>
                         </div>
                       </td>
+                    </tr>
+                  </tbody>
+                  <tbody v-show="learnOfflines == ''" class="text-center">
+                    <tr>
+                      <th scope="row" colspan="3">ไม่มีข้อมูล</th>
                     </tr>
                   </tbody>
                 </table>
@@ -584,6 +594,11 @@
                       </td>
                     </tr>
                   </tbody>
+                  <tbody v-show="finishedOnline == ''" class="text-center">
+                    <tr>
+                      <th scope="row" colspan="4">ไม่มีข้อมูล</th>
+                    </tr>
+                  </tbody>
                 </table>
               </div>
             </div>
@@ -663,6 +678,11 @@
                           >Download</a
                         >
                       </td>
+                    </tr>
+                  </tbody>
+                  <tbody v-show="finishedOffline == ''" class="text-center">
+                    <tr>
+                      <th scope="row" colspan="4">ไม่มีข้อมูล</th>
                     </tr>
                   </tbody>
                 </table>

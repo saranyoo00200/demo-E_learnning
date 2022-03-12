@@ -653,6 +653,11 @@
                       <td>{{ n.score }}/{{ n.scoreAll }}</td>
                     </tr>
                   </tbody>
+                  <tbody v-show="scorePretest == ''" class="text-center">
+                    <tr>
+                      <th scope="row" colspan="4">ไม่มีข้อมูล</th>
+                    </tr>
+                  </tbody>
                 </table>
               </div>
               <div
@@ -680,6 +685,11 @@
                       <td>{{ n.subjectId }}</td>
                       <td>{{ n.subjectName }}</td>
                       <td>{{ n.score }}/{{ n.scoreAll }}</td>
+                    </tr>
+                  </tbody>
+                  <tbody v-show="scorePosttest == ''" class="text-center">
+                    <tr>
+                      <th scope="row" colspan="4">ไม่มีข้อมูล</th>
                     </tr>
                   </tbody>
                 </table>
