@@ -56,6 +56,11 @@
                   </td>
                 </tr>
               </tbody>
+              <tbody v-show="dataSimulations == ''" class="text-center">
+                <tr>
+                  <th scope="row" colspan="4">ไม่มีข้อมูล</th>
+                </tr>
+              </tbody>
             </table>
             <div class="text-center bg-light p-3">
               <span

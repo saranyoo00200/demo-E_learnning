@@ -323,6 +323,11 @@
                       </td>
                     </tr>
                   </tbody>
+                  <tbody v-show="data_learn_online == ''" class="text-center">
+                    <tr>
+                      <th scope="row" colspan="4">ไม่มีข้อมูล</th>
+                    </tr>
+                  </tbody>
                 </table>
               </div>
             </div>
