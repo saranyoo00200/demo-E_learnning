@@ -323,7 +323,14 @@
                       </td>
                     </tr>
                   </tbody>
-                  <tbody v-show="data_learn_online == ''" class="text-center">
+                  <tbody
+                    v-show="
+                      data_learn_online == '' &&
+                      data_learn_offline_max == '' &&
+                      data_learn_offline_min == ''
+                    "
+                    class="text-center"
+                  >
                     <tr>
                       <th scope="row" colspan="4">ไม่มีข้อมูล</th>
                     </tr>
